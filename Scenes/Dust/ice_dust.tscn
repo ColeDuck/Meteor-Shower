@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://kli6bomgjfy0"]
+
+[ext_resource type="PackedScene" uid="uid://c1wxuq0vb2kw" path="res://Scenes/Dust/dust.tscn" id="1_7xst7"]
+[ext_resource type="Texture2D" uid="uid://bpdv7864437y4" path="res://assets/ice_dust.png" id="2_3why2"]
+[ext_resource type="Script" uid="uid://b1y7xtf1ioid1" path="res://Scripts/Dust/ice_dust.gd" id="2_ieg8g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
+size = Vector2(12, 13)
+
+[node name="Ice Dust" unique_id=114858520 instance=ExtResource("1_7xst7")]
+script = ExtResource("2_ieg8g")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1639534024]
+texture = ExtResource("2_3why2")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=187950514]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_jjvhh")

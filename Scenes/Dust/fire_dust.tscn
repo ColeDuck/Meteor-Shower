@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d0mjwd5edg0fp"]
+
+[ext_resource type="PackedScene" uid="uid://c1wxuq0vb2kw" path="res://Scenes/Dust/dust.tscn" id="1_fjrev"]
+[ext_resource type="Texture2D" uid="uid://b85xgq54gxc0w" path="res://assets/fire_dust.png" id="2_4txcy"]
+[ext_resource type="Script" uid="uid://duvy33ihdwjpj" path="res://Scripts/Dust/fire_dust.gd" id="2_aiowq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbba"]
+size = Vector2(12, 12)
+
+[node name="Fire Dust" unique_id=114858520 instance=ExtResource("1_fjrev")]
+script = ExtResource("2_aiowq")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1639534024]
+texture = ExtResource("2_4txcy")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=187950514]
+shape = SubResource("RectangleShape2D_8gbba")

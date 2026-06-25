@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dfi7nplxcxjgr"]
+
+[ext_resource type="Script" uid="uid://qqffoc6asabq" path="res://Scripts/Dust/meteor_dust.gd" id="1_6bp64"]
+[ext_resource type="PackedScene" uid="uid://dunyn087vdmgl" path="res://Scenes/asteroid.tscn" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://cxtqj2wcbn0jv" path="res://assets/Background_fake.png" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://c8spelpd3bn66" path="res://Scenes/Dust/water_dust.tscn" id="5_ynf5e"]
+
+[node name="Main" type="Node2D" unique_id=159807266]
+script = ExtResource("1_6bp64")
+
+[node name="Asteroid" parent="." unique_id=1784187997 instance=ExtResource("1_jjgbg")]
+
+[node name="Camera2D" type="Camera2D" parent="Asteroid" unique_id=1600353609]
+zoom = Vector2(4.59, 4.59)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=156557408]
+z_index = -143
+texture = ExtResource("2_bo1nx")
+
+[node name="Water_Dust" parent="." unique_id=630798645 instance=ExtResource("5_ynf5e")]

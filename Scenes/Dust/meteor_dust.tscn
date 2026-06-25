@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c1enkd4f1l3ml"]
+
+[ext_resource type="PackedScene" uid="uid://c1wxuq0vb2kw" path="res://Scenes/Dust/dust.tscn" id="1_1ly3x"]
+[ext_resource type="Texture2D" uid="uid://dm1w73exgfcrf" path="res://assets/meteor_dust.png" id="2_1u47a"]
+[ext_resource type="Script" uid="uid://urbcev3banx7" path="res://Scripts/Dust/meteor_dust.gd" id="2_dvkei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81s07"]
+size = Vector2(13, 13)
+
+[node name="Meteor_Dust" unique_id=114858520 instance=ExtResource("1_1ly3x")]
+script = ExtResource("2_dvkei")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1639534024]
+texture = ExtResource("2_1u47a")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=187950514]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_81s07")

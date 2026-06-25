@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c1wxuq0vb2kw"]
+
+[ext_resource type="Script" uid="uid://wyfk56medtld" path="res://Scripts/Dust/dust.gd" id="1_4ybl1"]
+
+[node name="Dust" type="Area2D" unique_id=114858520]
+script = ExtResource("1_4ybl1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1639534024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=187950514]
