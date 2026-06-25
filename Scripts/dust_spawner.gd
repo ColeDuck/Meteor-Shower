@@ -7,7 +7,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(1, 500):
+	for i in range(1, 5000):
 		var randX = randi_range(-300, 300)
 		var randY = randi_range(-300, 300)
 		var type = randi_range(0,3)
