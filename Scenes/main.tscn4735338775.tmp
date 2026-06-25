@@ -37,15 +37,14 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_81s07"]
 shader = SubResource("Shader_gt3je")
-shader_parameter/blur_amount = 2.475
+shader_parameter/blur_amount = 1.62
 
 [sub_resource type="Gradient" id="Gradient_wsu2k"]
-offsets = PackedFloat32Array(0.19924812, 0.4924812, 0.7180451)
+offsets = PackedFloat32Array(0.0037593986, 0.4849624, 1)
 colors = PackedColorArray(0.112900004, 0.07050001, 0.15, 1, 0.3310416, 0.12250001, 0.35, 1, 0.26048478, 0.080297284, 0.2347404, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_81s07"]
 gradient = SubResource("Gradient_wsu2k")
-use_hdr = true
 
 [node name="Main" type="Node2D" unique_id=159807266]
 
@@ -66,15 +65,14 @@ update_scale = false
 [node name="ColorRect" type="ColorRect" parent="Node2D" unique_id=158250464]
 z_index = -854
 material = SubResource("ShaderMaterial_81s07")
-offset_left = -197.0
-offset_top = -142.0
-offset_right = 196.0
-offset_bottom = 140.0
+offset_left = -151.0
+offset_top = -116.0
+offset_right = 147.0
+offset_bottom = 109.0
 
 [node name="Gradeint" type="Sprite2D" parent="Node2D" unique_id=1604671409]
 z_index = -1980
-position = Vector2(12.000008, 0.49999046)
-scale = Vector2(1.9062501, 337.00003)
+scale = Vector2(1.0937501, 215.75002)
 texture = SubResource("GradientTexture1D_81s07")
 
 [node name="Lue" parent="." unique_id=108679059 instance=ExtResource("9_jkdf5")]

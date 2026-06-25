@@ -24,7 +24,7 @@ var MAX_BUILDUP: float = 100
 # Storage
 var storage: Array[Matter]
 var allocated: int = 0
-var storage_size: int = 100
+var storage_size: int = 10000
 
 var Collider: CollisionShape2D
 var Camera: Camera2D
@@ -128,6 +128,8 @@ func _physics_process(delta: float) -> void:
 		
 	var direction_from_center: Vector2 = Vector2.from_angle(rotation).normalized() * 1.2
 	Arrow.position = (radius * direction_from_center) + global_position
+	
+	
 		
 func shoot() -> void:
 	print("shoot " + str(allocated))
