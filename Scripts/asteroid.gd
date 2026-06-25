@@ -2,7 +2,7 @@ extends Area2D
 
 # Movement
 var ROTATION_SPEED: float = 3
-var OPPOSITE_ROTATION_SPEED: float = 30
+var OPPOSITE_ROTATION_SPEED: float = 20
 var MAX_ROTATION: float = 400
 
 var ACCELERATION: float = 60
@@ -10,7 +10,7 @@ var MAX_SPEED: float = 200
 var DECELERATION: float = 0.9998
 
 # Negative for left, pos for right
-var rotational_velocity: float = 1
+var rotational_velocity: float = 0
 
 var movement_direction: Vector2
 var DIRECTION_CHANGE_ALLOWANCE: float = 10
@@ -28,19 +28,17 @@ var storage_size: int = 100
 var Collider: CollisionShape2D
 var Camera: Camera2D
 
+var radius: float = 1
+
 func _ready():
 	Collider = $AsteroidHitbox
 	Camera = $MainCam
 
 func calculate_radius(matter: Matter) -> void:
-	var outer: Vector2 = matter.global_position
-	var diameter: float = (global_position - outer).length()
-	var radius: float = diameter / 2
-
-	var r = matter.position.length()
-	Collider.shape.radius = max(1,r)
+	radius = matter.position.length()
+	Collider.shape.radius = max(1,radius)
 	
-	Camera.zoom = Vector2(100/r,100/r)
+	#Camera.zoom = Vector2(100/radius,100/radius)
 	#print("pos: " + str(global_position))
 	#print("mat: " + str(matter.global_position.length()))
 	#print(new_hitbox_size)
@@ -112,7 +110,7 @@ func _physics_process(delta: float) -> void:
 	position += movement_direction * delta
 	
 	# Calculate eject
-	bullet_eject_buildup += abs(rotational_velocity * delta * 400)
+	bullet_eject_buildup += abs(pow(rotational_velocity, 2))
 	#print(bullet_eject_buildup)
 	if (bullet_eject_buildup > MAX_BUILDUP):
 		shoot()
@@ -124,6 +122,27 @@ func shoot() -> void:
 	
 	bullet_eject_buildup = 0
 	print(index)
+	var matter: Matter = storage[index]
+	var bullet: Bullet = matter.shoot()
+	
+	var a: Vector2 = Vector2.from_angle(rotation).normalized()
+	bullet.position = radius * a + global_position
+	if rotational_velocity > 0:
+		# Left
+		print("right")
+		a = Vector2(-a.y, a.x)
+	else:
+		print("left")
+		a = Vector2(a.y, -a.x)
+	
+
+	bullet.velocity = a
+	bullet.velocity *= 50 * abs(rotational_velocity)
+	bullet.velocity += movement_direction
+	
+	bullet.top_level = true
+	add_child(bullet, false)
+	
 	storage[index].queue_free()
 	storage.remove_at(index)
 	index -= 1

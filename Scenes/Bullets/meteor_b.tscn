@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c2wukequeyijv"]
+
+[ext_resource type="PackedScene" uid="uid://b5efx40vevk3d" path="res://Scenes/Bullets/bullet.tscn" id="1_ocacn"]
+[ext_resource type="Texture2D" uid="uid://crp4ua5ejncot" path="res://assets/meteor_bullet.png" id="2_w8dss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynf5e"]
+size = Vector2(22, 22)
+
+[node name="Meteor B" unique_id=2113119815 instance=ExtResource("1_ocacn")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1349771428]
+shape = SubResource("RectangleShape2D_ynf5e")
+
+[node name="Sprite2D" parent="." index="1" unique_id=451859053]
+texture = ExtResource("2_w8dss")
