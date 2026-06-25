@@ -7,10 +7,11 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(1, 200):
-		var randX = randf_range(-100, 100)
-		var randY = randf_range(-100, 100)
+	for i in range(1, 5000):
+		var randX = randi_range(-300, 300)
+		var randY = randi_range(-300, 300)
 		var type = randi_range(0,3)
+		#type = 3
 		var dust: Dust
 		
 		if type == 0:
@@ -21,6 +22,9 @@ func _ready() -> void:
 			dust = fire.instantiate()
 		if type == 3:
 			dust = water.instantiate()
+			
+		var rot = randi_range(0, 3)
+		dust.rotation_degrees = 90 * rot
 			
 		dust.position.x = randX
 		dust.position.y = randY

@@ -8,8 +8,8 @@
 [node name="Ice Matter" unique_id=1880103678 instance=ExtResource("1_oh7mf")]
 script = ExtResource("2_jygkh")
 
-[node name="Texture" parent="." index="0" unique_id=573175117]
+[node name="Nugget" parent="." index="0" unique_id=573175117]
 texture = ExtResource("3_e5vky")
 
-[node name="Background" parent="." index="1" unique_id=1458586969]
+[node name="Outline" parent="." index="1" unique_id=1458586969]
 texture = ExtResource("4_s7qli")

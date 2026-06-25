@@ -6,5 +6,6 @@
 script = ExtResource("1_4ybl1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1639534024]
+z_index = -10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=187950514]
