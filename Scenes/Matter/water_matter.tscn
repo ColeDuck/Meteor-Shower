@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dihuw3rqwqtke"]
+
+[ext_resource type="PackedScene" uid="uid://3haaf3we43s0" path="res://Scenes/Matter/matter.tscn" id="1_nqmnv"]
+[ext_resource type="Script" uid="uid://b4ru2jxbhxuf1" path="res://Scripts/Matter/water_matter.gd" id="2_yhgur"]
+[ext_resource type="Texture2D" uid="uid://df03t5uwfykg2" path="res://assets/water.png" id="3_tkcvd"]
+[ext_resource type="Texture2D" uid="uid://vwfdgwg05vnq" path="res://assets/water_o.png" id="4_h5jx2"]
+
+[node name="Water Matter" unique_id=1880103678 instance=ExtResource("1_nqmnv")]
+script = ExtResource("2_yhgur")
+
+[node name="Texture" parent="." index="0" unique_id=573175117]
+texture = ExtResource("3_tkcvd")
+
+[node name="Background" parent="." index="1" unique_id=1458586969]
+texture = ExtResource("4_h5jx2")

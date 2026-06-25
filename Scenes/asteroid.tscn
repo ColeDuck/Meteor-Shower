@@ -4,13 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://bm5dgny00axv0" path="res://assets/asteroid_fake.png" id="2_rvlwq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_81s07"]
-radius = 9.0
 
-[node name="Asteroid" type="CharacterBody2D" unique_id=1784187997]
+[node name="Asteroid" type="Area2D" unique_id=317959770]
 script = ExtResource("1_a2bka")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=849028453]
+z_index = -8
 texture = ExtResource("2_rvlwq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574058614]
 shape = SubResource("CircleShape2D_81s07")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

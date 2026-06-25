@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cwhaldw30ykte" path="res://Scripts/Matter/matter.gd" id="1_f7qkt"]
 
-[node name="Matter" type="Node2D" unique_id=1880103678]
+[node name="Matter" type="Node2D" unique_id=1880103678 node_paths=PackedStringArray("Nugget", "Outline")]
 script = ExtResource("1_f7qkt")
+Nugget = NodePath("Nugget")
+Outline = NodePath("Outline")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=573175117]
+[node name="Nugget" type="Sprite2D" parent="." unique_id=573175117]
+
+[node name="Outline" type="Sprite2D" parent="." unique_id=1458586969]

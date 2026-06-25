@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 
 # Movement
 var ROTATION_SPEED: float = 6
@@ -22,13 +22,34 @@ var bullet_eject_buildup: float = 0
 var MAX_BUILDUP: float = 100
 
 # Storage
-var storage: Array[Bullet]
-var empty_locations: Array[int] # Maps to indexes in storage
+var storage: Array[Matter]
+var index: int = 0
+var storage_size: int = 40
 
-func collect_matter(dust: Dust):
-	pass
-
-
+func collect_dust(dust: Dust):
+	print("meow")
+	# Get type
+	var matter: Matter = dust.collect()
+	# Do we have room?
+	if index >= storage_size:
+		pass
+		
+	# Yes, determine location
+	var c: float = 0.7 # Determines how tight the spiral is
+	var pos: Vector2 = Vector2(round(c * index * cos(index)), round(c * index * sin(index)))
+	matter.position = pos
+	matter.Nugget.z_index = index + 1
+	matter.Outline.z_index = -1
+	
+	var rotation = randi_range(0, 3)
+	matter.rotation_degrees = 90 * rotation
+	
+	# Add to storage
+	storage.append(matter)
+	index += 1
+	add_child(matter, false)
+	dust.remove()
+	
 
 func _physics_process(delta: float) -> void:
 	
@@ -65,3 +86,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Move along rotation
 	position += movement_direction * delta
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Dust:
+		collect_dust(area)
