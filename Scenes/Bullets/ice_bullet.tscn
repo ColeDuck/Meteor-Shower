@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://exgsffqsraw2"]
+
+[ext_resource type="PackedScene" uid="uid://b5efx40vevk3d" path="res://Scenes/Bullets/bullet.tscn" id="1_5x81r"]
+[ext_resource type="Texture2D" uid="uid://bo0a26506ugbf" path="res://assets/Matter/ice.png" id="2_3kd8r"]
+[ext_resource type="Script" uid="uid://drl2g5w6sqlr8" path="res://Scripts/Bullets/ice_bullet.gd" id="2_ry2xk"]
+[ext_resource type="Texture2D" uid="uid://c4gnl6fn4abk7" path="res://assets/Matter/ice_o.png" id="3_ry2xk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81s07"]
+size = Vector2(12, 12)
+
+[node name="IceBullet" unique_id=2113119815 instance=ExtResource("1_5x81r")]
+collision_layer = 2
+script = ExtResource("2_ry2xk")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1349771428]
+shape = SubResource("RectangleShape2D_81s07")
+
+[node name="Sprite2D" parent="." index="1" unique_id=451859053]
+texture = ExtResource("2_3kd8r")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="2" unique_id=397250391]
+texture = ExtResource("3_ry2xk")

@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://3haaf3we43s0" path="res://Scenes/Matter/matter.tscn" id="1_o8prs"]
 [ext_resource type="Script" uid="uid://du8aimbx2atc1" path="res://Scripts/Matter/meteor_matter.gd" id="2_igohj"]
 [ext_resource type="PackedScene" uid="uid://c2wukequeyijv" path="res://Scenes/Bullets/meteor_b.tscn" id="3_igohj"]
-[ext_resource type="Texture2D" uid="uid://bcnd7cb7lulh2" path="res://assets/meteor.png" id="3_l66jg"]
-[ext_resource type="Texture2D" uid="uid://c7nmtihsclp2f" path="res://assets/meteor_o.png" id="4_71od0"]
+[ext_resource type="Texture2D" uid="uid://bcnd7cb7lulh2" path="res://assets/Matter/meteor.png" id="3_l66jg"]
+[ext_resource type="Texture2D" uid="uid://c7nmtihsclp2f" path="res://assets/Matter/meteor_o.png" id="4_71od0"]
 
 [node name="Meteor Matter" unique_id=1880103678 instance=ExtResource("1_o8prs")]
 script = ExtResource("2_igohj")

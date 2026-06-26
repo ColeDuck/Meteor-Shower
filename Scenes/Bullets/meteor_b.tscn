@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://c2wukequeyijv"]
 
 [ext_resource type="PackedScene" uid="uid://b5efx40vevk3d" path="res://Scenes/Bullets/bullet.tscn" id="1_ocacn"]
-[ext_resource type="Texture2D" uid="uid://c7nmtihsclp2f" path="res://assets/meteor_o.png" id="2_w8dss"]
-[ext_resource type="Texture2D" uid="uid://bcnd7cb7lulh2" path="res://assets/meteor.png" id="3_4br6a"]
+[ext_resource type="Script" uid="uid://cx6ucckt8vffu" path="res://Scripts/Bullets/meteor_b.gd" id="2_4br6a"]
+[ext_resource type="Texture2D" uid="uid://c7nmtihsclp2f" path="res://assets/Matter/meteor_o.png" id="2_w8dss"]
+[ext_resource type="Texture2D" uid="uid://bcnd7cb7lulh2" path="res://assets/Matter/meteor.png" id="3_4br6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynf5e"]
 size = Vector2(12, 12)
 
 [node name="Meteor B" unique_id=2113119815 instance=ExtResource("1_ocacn")]
+collision_layer = 2
+script = ExtResource("2_4br6a")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1349771428]
 shape = SubResource("RectangleShape2D_ynf5e")

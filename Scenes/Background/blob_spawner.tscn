@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cihu7orwtkgci"]
+
+[ext_resource type="Script" uid="uid://c88mr1is8lhh3" path="res://Scripts/Managers/blob_spawner.gd" id="1_ylssd"]
+
+[node name="BlobSpawner" type="Node2D" unique_id=1908428818]
+script = ExtResource("1_ylssd")
+
+[node name="Optional" type="Sprite2D" parent="." unique_id=1669074634]

@@ -2,11 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://3haaf3we43s0" path="res://Scenes/Matter/matter.tscn" id="1_oh7mf"]
 [ext_resource type="Script" uid="uid://blbf67b13u26b" path="res://Scripts/Matter/ice_matter.gd" id="2_jygkh"]
-[ext_resource type="Texture2D" uid="uid://bo0a26506ugbf" path="res://assets/ice.png" id="3_e5vky"]
-[ext_resource type="Texture2D" uid="uid://c4gnl6fn4abk7" path="res://assets/ice_o.png" id="4_s7qli"]
+[ext_resource type="Texture2D" uid="uid://bo0a26506ugbf" path="res://assets/Matter/ice.png" id="3_e5vky"]
+[ext_resource type="PackedScene" uid="uid://exgsffqsraw2" path="res://Scenes/Bullets/ice_bullet.tscn" id="3_jygkh"]
+[ext_resource type="Texture2D" uid="uid://c4gnl6fn4abk7" path="res://assets/Matter/ice_o.png" id="4_s7qli"]
 
 [node name="Ice Matter" unique_id=1880103678 instance=ExtResource("1_oh7mf")]
 script = ExtResource("2_jygkh")
+Ice_Bullet = ExtResource("3_jygkh")
 
 [node name="Nugget" parent="." index="0" unique_id=573175117]
 texture = ExtResource("3_e5vky")

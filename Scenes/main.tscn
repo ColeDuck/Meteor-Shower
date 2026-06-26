@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://dfi7nplxcxjgr"]
 
-[ext_resource type="PackedScene" uid="uid://dunyn087vdmgl" path="res://Scenes/asteroid.tscn" id="1_jjgbg"]
-[ext_resource type="Texture2D" uid="uid://cxtqj2wcbn0jv" path="res://assets/Background_fake.png" id="2_bo1nx"]
-[ext_resource type="Script" uid="uid://spkcfjerd4jp" path="res://Scripts/background.gd" id="3_344ge"]
+[ext_resource type="PackedScene" uid="uid://dunyn087vdmgl" path="res://Scenes/Managers/asteroid.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c1enkd4f1l3ml" path="res://Scenes/Dust/meteor_dust.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://cjb0gjcwt5s86" path="res://Scenes/Dust/water_dust.tscn" id="5_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://d0mjwd5edg0fp" path="res://Scenes/Dust/fire_dust.tscn" id="6_hptm8"]
-[ext_resource type="Script" uid="uid://daus05o80vtdl" path="res://Scripts/dust_spawner.gd" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://daus05o80vtdl" path="res://Scripts/Backgrounds/dust_spawner.gd" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://kli6bomgjfy0" path="res://Scenes/Dust/ice_dust.tscn" id="7_d1ilt"]
-[ext_resource type="PackedScene" uid="uid://cihu7orwtkgci" path="res://Scenes/blob_spawner.tscn" id="9_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://cihu7orwtkgci" path="res://Scenes/Background/blob_spawner.tscn" id="9_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://dd6g7soyjbnj8" path="res://assets/Background/p1.png" id="10_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://byncrlly5eohu" path="res://assets/Background/p2.png" id="11_k12tt"]
 [ext_resource type="Texture2D" uid="uid://ne0bw3lnunpr" path="res://assets/Background/p3.png" id="12_h1bgf"]
@@ -22,7 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://3lnr4gkaquqd" path="res://assets/Background/g1.png" id="20_ueoa1"]
 [ext_resource type="Texture2D" uid="uid://ivahtnmenyjp" path="res://assets/Background/g2.png" id="21_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://c3fx7qmmw688n" path="res://assets/Background/g3.png" id="22_7k868"]
+[ext_resource type="PackedScene" uid="uid://daqeycmvn2fl8" path="res://Scenes/Enemy/steven.tscn" id="22_ee4r6"]
+[ext_resource type="PackedScene" uid="uid://pi6tnlga1wc3" path="res://Scenes/Enemy/james.tscn" id="23_cbgmd"]
 [ext_resource type="Texture2D" uid="uid://c50km3rupmil6" path="res://assets/Background/g4.png" id="23_hpc6h"]
+[ext_resource type="PackedScene" uid="uid://ctts3n0wkc2qi" path="res://Scenes/Enemy/jimbo.tscn" id="24_1w6v2"]
+[ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="25_ueoa1"]
+[ext_resource type="PackedScene" uid="uid://dun0ijl0jtw0c" path="res://Scenes/Enemy/sam.tscn" id="26_6vcvc"]
 
 [sub_resource type="Shader" id="Shader_gt3je"]
 code = "shader_type canvas_item;
@@ -53,17 +56,18 @@ use_hdr = true
 unique_name_in_owner = true
 
 [node name="MainCam" type="Camera2D" parent="Asteroid" unique_id=1600353609]
-zoom = Vector2(4.59, 4.59)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+position_smoothing_speed = 12.705
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Asteroid/MainCam" unique_id=1195869497]
-remote_path = NodePath("../../../Node2D")
+remote_path = NodePath("../../../BackgroundFolder")
 update_rotation = false
 update_scale = false
 
-[node name="Node2D" type="Node2D" parent="." unique_id=511346629]
+[node name="BackgroundFolder" type="Node2D" parent="." unique_id=511346629]
 
-[node name="ColorRect" type="ColorRect" parent="Node2D" unique_id=158250464]
+[node name="ColorRect" type="ColorRect" parent="BackgroundFolder" unique_id=158250464]
 z_index = -854
 material = SubResource("ShaderMaterial_81s07")
 offset_left = -197.0
@@ -71,7 +75,7 @@ offset_top = -142.0
 offset_right = 196.0
 offset_bottom = 140.0
 
-[node name="Gradeint" type="Sprite2D" parent="Node2D" unique_id=1604671409]
+[node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
 z_index = -1980
 position = Vector2(12.000008, 0.49999046)
 scale = Vector2(1.9062501, 337.00003)
@@ -108,8 +112,37 @@ ice = ExtResource("7_d1ilt")
 fire = ExtResource("6_hptm8")
 water = ExtResource("5_ynf5e")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=156557408]
+[node name="James" parent="." unique_id=884104433 instance=ExtResource("23_cbgmd")]
 visible = false
-z_index = -2525
-texture = ExtResource("2_bo1nx")
-script = ExtResource("3_344ge")
+position = Vector2(70, 36)
+
+[node name="Jimbo" parent="." unique_id=1082698604 instance=ExtResource("24_1w6v2")]
+visible = false
+position = Vector2(-88, 28)
+
+[node name="Neil" parent="." unique_id=928233021 instance=ExtResource("25_ueoa1")]
+position = Vector2(50, -71)
+
+[node name="Sam" parent="." unique_id=1121672432 instance=ExtResource("26_6vcvc")]
+visible = false
+position = Vector2(-64, -72)
+
+[node name="Steven" parent="." unique_id=334731642 instance=ExtResource("22_ee4r6")]
+visible = false
+position = Vector2(94, -25)
+base_health = 364.115
+
+[node name="Neil2" parent="." unique_id=1758235478 instance=ExtResource("25_ueoa1")]
+position = Vector2(-49, 84)
+
+[node name="Neil3" parent="." unique_id=1592470838 instance=ExtResource("25_ueoa1")]
+position = Vector2(46, 53)
+
+[node name="Neil4" parent="." unique_id=1062253538 instance=ExtResource("25_ueoa1")]
+position = Vector2(-68, 8)
+
+[node name="Neil5" parent="." unique_id=63391166 instance=ExtResource("25_ueoa1")]
+position = Vector2(102, 10)
+
+[node name="Neil6" parent="." unique_id=640333085 instance=ExtResource("25_ueoa1")]
+position = Vector2(-60, -66)

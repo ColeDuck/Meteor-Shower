@@ -2,11 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://3haaf3we43s0" path="res://Scenes/Matter/matter.tscn" id="1_mnb3d"]
 [ext_resource type="Script" uid="uid://debybhu36evr2" path="res://Scripts/Matter/fire_matter.gd" id="2_s0dm0"]
-[ext_resource type="Texture2D" uid="uid://dburcviylybui" path="res://assets/fire.png" id="3_ot4o0"]
-[ext_resource type="Texture2D" uid="uid://cxkr3nbb6c1yc" path="res://assets/fire_o.png" id="4_4w4bp"]
+[ext_resource type="Texture2D" uid="uid://dburcviylybui" path="res://assets/Matter/fire.png" id="3_ot4o0"]
+[ext_resource type="PackedScene" uid="uid://b3pegawrmgjqk" path="res://Scenes/Bullets/fire_bullet.tscn" id="3_s0dm0"]
+[ext_resource type="Texture2D" uid="uid://cxkr3nbb6c1yc" path="res://assets/Matter/fire_o.png" id="4_4w4bp"]
 
 [node name="Fire Matter" unique_id=1880103678 instance=ExtResource("1_mnb3d")]
 script = ExtResource("2_s0dm0")
+Fire_Bullet = ExtResource("3_s0dm0")
 
 [node name="Nugget" parent="." index="0" unique_id=573175117]
 texture = ExtResource("3_ot4o0")

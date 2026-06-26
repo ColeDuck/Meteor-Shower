@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bu1cew85pcs6v"]
+
+[ext_resource type="Script" uid="uid://chse41fl2e8om" path="res://Scripts/Backgrounds/blob.gd" id="1_cmfp3"]
+
+[node name="Blob" type="Sprite2D" unique_id=2028215858]
+top_level = true
+script = ExtResource("1_cmfp3")

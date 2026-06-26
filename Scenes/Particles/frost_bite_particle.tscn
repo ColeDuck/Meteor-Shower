@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://d1pi2arvg658c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h6qkg"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dmwl5"]
+load_path = "res://.godot/imported/ice_sheet.png-d6af6dfab78b502388ce514f2a7279a5.ctex"
+
+[sub_resource type="Curve" id="Curve_2c7jf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4317841, 1), 0.0, 0.0, 0, 0, Vector2(0.56821585, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_wkdja"]
+curve = SubResource("Curve_2c7jf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dmqox"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(-7.65, 6.57, 1)
+angle_min = -165.4
+angle_max = 266.2
+direction = Vector3(0, -0.535, 0)
+spread = 0.0
+initial_velocity_max = 1.4
+angular_velocity_min = -29.080015
+angular_velocity_max = 44.369984
+gravity = Vector3(0, 0.27, 0)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = SubResource("CurveTexture_wkdja")
+anim_offset_max = 1.0
+
+[node name="FrostBiteParticle" type="GPUParticles2D" unique_id=1817767132]
+material = SubResource("CanvasItemMaterial_h6qkg")
+amount = 7
+texture = SubResource("CompressedTexture2D_dmwl5")
+lifetime = 8.44
+randomness = 0.13
+process_material = SubResource("ParticleProcessMaterial_dmqox")

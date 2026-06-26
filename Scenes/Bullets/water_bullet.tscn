@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dj6kdyfs1t665"]
+
+[ext_resource type="PackedScene" uid="uid://b5efx40vevk3d" path="res://Scenes/Bullets/bullet.tscn" id="1_1eix0"]
+[ext_resource type="Script" uid="uid://fix72ghfei24" path="res://Scripts/Bullets/water_bullet.gd" id="2_yqw4v"]
+[ext_resource type="Texture2D" uid="uid://vwfdgwg05vnq" path="res://assets/Matter/water_o.png" id="3_sl6pq"]
+[ext_resource type="Texture2D" uid="uid://df03t5uwfykg2" path="res://assets/Matter/water.png" id="4_xa84s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81s07"]
+size = Vector2(12, 13)
+
+[node name="WaterBullet" unique_id=2113119815 instance=ExtResource("1_1eix0")]
+collision_layer = 2
+script = ExtResource("2_yqw4v")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1349771428]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_81s07")
+
+[node name="Sprite2D" parent="." index="1" unique_id=451859053]
+texture = ExtResource("3_sl6pq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="2" unique_id=1387352152]
+texture = ExtResource("4_xa84s")

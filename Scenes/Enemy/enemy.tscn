@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://blvq4pvce6jq4"]
+
+[ext_resource type="Script" uid="uid://c56sjrko302uu" path="res://Scripts/Enemy/enemy.gd" id="1_nvvbs"]
+[ext_resource type="PackedScene" uid="uid://d1pi2arvg658c" path="res://Scenes/Particles/frost_bite_particle.tscn" id="2_nvvbs"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=129278397 node_paths=PackedStringArray("animator", "bubble", "ice")]
+script = ExtResource("1_nvvbs")
+animator = NodePath("AnimatedSprite2D")
+bubble = NodePath("bubble")
+ice = NodePath("ice")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1536105433]
+
+[node name="bubble" type="Sprite2D" parent="." unique_id=1951337497]
+modulate = Color(1, 1, 1, 0.6509804)
+
+[node name="ice" type="Sprite2D" parent="." unique_id=1752232193]
+modulate = Color(1, 1, 1, 0.65882355)
+
+[node name="FrostBiteParticle" parent="." unique_id=1817767132 instance=ExtResource("2_nvvbs")]
+emitting = false
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1376675364]
+collision_layer = 0
+collision_mask = 2
+
+[node name="HitBox" type="CollisionShape2D" parent="Area2D" unique_id=774346043]
+
+[node name="AvoidShape" type="CollisionShape2D" parent="." unique_id=170604090]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

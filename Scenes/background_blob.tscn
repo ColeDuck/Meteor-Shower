@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cc67skstpms1v"]
-
-[ext_resource type="Script" uid="uid://2bvn42dn5ntt" path="res://Scripts/background_blob.gd" id="1_8ast4"]
-
-[node name="BackgroundBlob" type="Node2D" unique_id=524280441]
-script = ExtResource("1_8ast4")

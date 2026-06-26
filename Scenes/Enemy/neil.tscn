@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dq320n088wynt"]
+
+[ext_resource type="PackedScene" uid="uid://blvq4pvce6jq4" path="res://Scenes/Enemy/enemy.tscn" id="1_3rv0y"]
+[ext_resource type="Texture2D" uid="uid://cpv7ocdlcou5e" path="res://assets/Enemy/neil_sheet.png" id="2_waxn7"]
+[ext_resource type="Texture2D" uid="uid://i2w37lcuyx8j" path="res://assets/Particles/big_bubble.png" id="3_3n5fi"]
+[ext_resource type="Texture2D" uid="uid://brg2do1e271uf" path="res://assets/Particles/big_ice.png" id="4_keoai"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvbo0"]
+atlas = ExtResource("2_waxn7")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5oyj"]
+atlas = ExtResource("2_waxn7")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyi38"]
+atlas = ExtResource("2_waxn7")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37eat"]
+atlas = ExtResource("2_waxn7")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjkf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvbo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5oyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyi38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37eat")
+}],
+"loop": 1,
+"name": &"Move",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jli3k"]
+size = Vector2(28, 24)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rv0y"]
+radius = 7.0
+height = 26.0
+
+[node name="Neil" unique_id=334731642 instance=ExtResource("1_3rv0y")]
+base_health = 5.725
+base_damage = 14.62
+base_speed = 77.965
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+sprite_frames = SubResource("SpriteFrames_xjkf8")
+animation = &"Move"
+frame_progress = 0.61398035
+
+[node name="bubble" parent="." index="1" unique_id=1951337497]
+visible = false
+texture = ExtResource("3_3n5fi")
+
+[node name="ice" parent="." index="2" unique_id=1752232193]
+visible = false
+position = Vector2(1, -1)
+texture = ExtResource("4_keoai")
+
+[node name="HitBox" parent="Area2D" parent_id_path=PackedInt32Array(1376675364) index="0" unique_id=774346043]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jli3k")
+
+[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+shape = SubResource("CapsuleShape2D_3rv0y")

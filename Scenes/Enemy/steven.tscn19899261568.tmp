@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://daqeycmvn2fl8"]
+
+[ext_resource type="PackedScene" uid="uid://blvq4pvce6jq4" path="res://Scenes/Enemy/enemy.tscn" id="1_ei5v6"]
+[ext_resource type="Script" uid="uid://djenlx4370v80" path="res://Scripts/Enemy/steven.gd" id="2_5xc2b"]
+[ext_resource type="Texture2D" uid="uid://du01unqj4cj67" path="res://assets/Enemy/steven.png" id="2_y1j2x"]
+[ext_resource type="Texture2D" uid="uid://i2w37lcuyx8j" path="res://assets/Particles/big_bubble.png" id="3_pyaqu"]
+[ext_resource type="Texture2D" uid="uid://brg2do1e271uf" path="res://assets/Particles/big_ice.png" id="4_5xc2b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgeqe"]
+atlas = ExtResource("2_y1j2x")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84bca"]
+atlas = ExtResource("2_y1j2x")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg81f"]
+atlas = ExtResource("2_y1j2x")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_meqrg"]
+atlas = ExtResource("2_y1j2x")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvvbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgeqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84bca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg81f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_meqrg")
+}],
+"loop": 1,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvvbs"]
+size = Vector2(22, 30)
+
+[node name="Steven" unique_id=334731642 instance=ExtResource("1_ei5v6")]
+script = ExtResource("2_5xc2b")
+base_health = 19.71
+base_damage = 22.25
+base_speed = 1.38
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+sprite_frames = SubResource("SpriteFrames_nvvbs")
+animation = &"Move"
+
+[node name="HitBox" parent="." index="1" unique_id=774346043]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nvvbs")
+
+[node name="bubble" parent="." index="2" unique_id=1951337497]
+position = Vector2(0, 5)
+texture = ExtResource("3_pyaqu")
+
+[node name="ice" parent="." index="3" unique_id=1752232193]
+position = Vector2(1, 5)
+texture = ExtResource("4_5xc2b")
+
+[node name="FrostBiteParticle" parent="." index="4" unique_id=2074148663]
+visible = true

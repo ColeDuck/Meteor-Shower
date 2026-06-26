@@ -8,3 +8,7 @@ script = ExtResource("1_tcy0y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1349771428]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=451859053]
+
+[node name="Explode" type="GPUParticles2D" parent="." unique_id=1065093188]
+
+[node name="Break" type="GPUParticles2D" parent="." unique_id=1088808695]

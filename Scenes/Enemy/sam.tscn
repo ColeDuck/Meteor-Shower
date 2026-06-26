@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dun0ijl0jtw0c"]
+
+[ext_resource type="PackedScene" uid="uid://blvq4pvce6jq4" path="res://Scenes/Enemy/enemy.tscn" id="1_s2a3s"]
+[ext_resource type="Texture2D" uid="uid://vfa1gb2b50k6" path="res://assets/Enemy/sam_sheet.png" id="2_pmmge"]
+[ext_resource type="Texture2D" uid="uid://deju4c3qmh0fo" path="res://assets/Particles/small_bubble.png" id="3_qqgxk"]
+[ext_resource type="Texture2D" uid="uid://crbj4s4ukq0ar" path="res://assets/Particles/Small_Ice.png" id="4_2epeh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqgxk"]
+atlas = ExtResource("2_pmmge")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2epeh"]
+atlas = ExtResource("2_pmmge")
+region = Rect2(14, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtwn4"]
+atlas = ExtResource("2_pmmge")
+region = Rect2(28, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_218hq"]
+atlas = ExtResource("2_pmmge")
+region = Rect2(42, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dmwl5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqgxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2epeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtwn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_218hq")
+}],
+"loop": 1,
+"name": &"Move",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlweo"]
+size = Vector2(20, 17)
+
+[node name="Sam" unique_id=334731642 instance=ExtResource("1_s2a3s")]
+base_health = 14.47
+base_damage = 4.78
+base_speed = 24.845
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+sprite_frames = SubResource("SpriteFrames_dmwl5")
+animation = &"Move"
+frame_progress = 0.30424726
+
+[node name="HitBox" parent="." index="1" unique_id=774346043]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_tlweo")
+
+[node name="bubble" parent="." index="2" unique_id=1951337497]
+position = Vector2(1, 1)
+texture = ExtResource("3_qqgxk")
+
+[node name="ice" parent="." index="3" unique_id=1752232193]
+position = Vector2(0, 2)
+texture = ExtResource("4_2epeh")
