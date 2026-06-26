@@ -22,7 +22,6 @@ StatManager="*uid://dd0qve6vffh3g"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
 [input]
@@ -64,6 +63,7 @@ MoveDown={
 2d_physics/layer_2="Bullets"
 2d_physics/layer_4="Dust"
 2d_physics/layer_5="Player"
+2d_physics/layer_8="Avoid"
 
 [physics]
 

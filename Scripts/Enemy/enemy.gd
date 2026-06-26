@@ -81,7 +81,8 @@ func move(delta: float, speed_mult: float) -> void:
 	move_and_slide()
 	velocity = saved
 
-	rotation += global_position.angle_to_point(player.global_position)
+	var target_angle = global_position.direction_to(player.global_position).angle() + PI/2
+	rotation = lerp_angle(rotation, target_angle, 0.1)
 	
 	
 	
@@ -171,6 +172,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is not Bullet:
 		return
 	var b: Bullet = area
+	b.destroy()
 
 	damage_me(b.damage())
 	

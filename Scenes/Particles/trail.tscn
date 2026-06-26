@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cy1cp2jxr0axg"]
+
+[node name="Trail" type="GPUParticles2D" unique_id=1613221815]
+visible = false

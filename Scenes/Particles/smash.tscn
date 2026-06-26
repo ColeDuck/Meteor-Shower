@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://v826pyyh80ad"]
+
+[node name="Smash" type="GPUParticles2D" unique_id=1204655263]
+visible = false

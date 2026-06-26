@@ -45,10 +45,12 @@ animations = [{
 size = Vector2(28, 24)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rv0y"]
-radius = 7.0
-height = 26.0
+radius = 4.0
+height = 22.0
 
 [node name="Neil" unique_id=334731642 instance=ExtResource("1_3rv0y")]
+rotation = 1.5707964
+motion_mode = 1
 base_health = 5.725
 base_damage = 14.62
 base_speed = 77.965
@@ -68,7 +70,6 @@ position = Vector2(1, -1)
 texture = ExtResource("4_keoai")
 
 [node name="HitBox" parent="Area2D" parent_id_path=PackedInt32Array(1376675364) index="0" unique_id=774346043]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jli3k")
 

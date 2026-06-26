@@ -44,6 +44,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvvbs"]
 size = Vector2(22, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uim2h"]
+size = Vector2(20, 11)
+
 [node name="Steven" unique_id=334731642 instance=ExtResource("1_ei5v6")]
 base_health = 48.445
 base_damage = 32.25
@@ -54,17 +57,20 @@ sprite_frames = SubResource("SpriteFrames_nvvbs")
 animation = &"Move"
 frame_progress = 0.50584507
 
-[node name="HitBox" parent="." index="1" unique_id=774346043]
-visible = false
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_nvvbs")
-
-[node name="bubble" parent="." index="2" unique_id=1951337497]
+[node name="bubble" parent="." index="1" unique_id=1951337497]
 visible = false
 position = Vector2(0, 5)
 texture = ExtResource("3_pyaqu")
 
-[node name="ice" parent="." index="3" unique_id=1752232193]
+[node name="ice" parent="." index="2" unique_id=1752232193]
 visible = false
 position = Vector2(1, 3)
 texture = ExtResource("4_5xc2b")
+
+[node name="HitBox" parent="Area2D" parent_id_path=PackedInt32Array(1376675364) index="0" unique_id=774346043]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nvvbs")
+
+[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_uim2h")

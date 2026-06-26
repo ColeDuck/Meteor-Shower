@@ -10,11 +10,7 @@ func _ready() -> void:
 	for i in range(1, 1500):
 		var randX = randi_range(-300, 300)
 		var randY = randi_range(-300, 300)
-		var type = randi_range(0,1)
-		if type == 0:
-			type = 1
-		elif type == 1:
-			type = 3
+		var type = randi_range(0,3)
 		var dust: Dust
 		
 		type = 0

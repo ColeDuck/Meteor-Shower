@@ -14,6 +14,7 @@ script = ExtResource("1_a2bka")
 shape = SubResource("CircleShape2D_81s07")
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=1179922900]
+z_index = 501
 position = Vector2(0, -13)
 texture = ExtResource("2_a2bka")
 

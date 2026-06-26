@@ -9,6 +9,12 @@ script = ExtResource("1_tcy0y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=451859053]
 
-[node name="Explode" type="GPUParticles2D" parent="." unique_id=1065093188]
+[node name="Smash" type="GPUParticles2D" parent="." unique_id=1781158148]
+unique_name_in_owner = true
 
-[node name="Break" type="GPUParticles2D" parent="." unique_id=1088808695]
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=2081852064]
+unique_name_in_owner = true
+process_mode = 3
+z_index = -200
+z_as_relative = false
+visibility_rect = Rect2(-200000, -200000, 2000000, 2000000)

@@ -44,6 +44,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlweo"]
 size = Vector2(20, 17)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nf8j8"]
+radius = 8.0
+
 [node name="Sam" unique_id=334731642 instance=ExtResource("1_s2a3s")]
 base_health = 14.47
 base_damage = 4.78
@@ -54,14 +57,19 @@ sprite_frames = SubResource("SpriteFrames_dmwl5")
 animation = &"Move"
 frame_progress = 0.30424726
 
-[node name="HitBox" parent="." index="1" unique_id=774346043]
-position = Vector2(0, 1.5)
-shape = SubResource("RectangleShape2D_tlweo")
-
-[node name="bubble" parent="." index="2" unique_id=1951337497]
+[node name="bubble" parent="." index="1" unique_id=1951337497]
+visible = false
 position = Vector2(1, 1)
 texture = ExtResource("3_qqgxk")
 
-[node name="ice" parent="." index="3" unique_id=1752232193]
+[node name="ice" parent="." index="2" unique_id=1752232193]
+visible = false
 position = Vector2(0, 2)
 texture = ExtResource("4_2epeh")
+
+[node name="HitBox" parent="Area2D" parent_id_path=PackedInt32Array(1376675364) index="0" unique_id=774346043]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_tlweo")
+
+[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+shape = SubResource("CircleShape2D_nf8j8")

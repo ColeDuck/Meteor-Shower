@@ -28,7 +28,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t2r4"]
-size = Vector2(12, 10)
+size = Vector2(8, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyaqu"]
+size = Vector2(8, 4)
 
 [node name="James" unique_id=334731642 instance=ExtResource("1_nf8j8")]
 base_health = 10.0
@@ -40,15 +43,19 @@ sprite_frames = SubResource("SpriteFrames_nvvbs")
 animation = &"Move"
 frame_progress = 0.69987
 
-[node name="HitBox" parent="." index="1" unique_id=774346043]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_2t2r4")
-
-[node name="bubble" parent="." index="2" unique_id=1951337497]
+[node name="bubble" parent="." index="1" unique_id=1951337497]
 visible = false
 texture = ExtResource("3_novbl")
 
-[node name="ice" parent="." index="3" unique_id=1752232193]
+[node name="ice" parent="." index="2" unique_id=1752232193]
 visible = false
 position = Vector2(0, 1)
 texture = ExtResource("4_se6kc")
+
+[node name="HitBox" parent="Area2D" parent_id_path=PackedInt32Array(1376675364) index="0" unique_id=774346043]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_2t2r4")
+
+[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_pyaqu")
