@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://dfi7nplxcxjgr"]
 
 [ext_resource type="PackedScene" uid="uid://dunyn087vdmgl" path="res://Scenes/Managers/asteroid.tscn" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://grx64fls65vx" path="res://assets/purpleee.png" id="2_hpc6h"]
 [ext_resource type="PackedScene" uid="uid://c1enkd4f1l3ml" path="res://Scenes/Dust/meteor_dust.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://cjb0gjcwt5s86" path="res://Scenes/Dust/water_dust.tscn" id="5_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://d0mjwd5edg0fp" path="res://Scenes/Dust/fire_dust.tscn" id="6_hptm8"]
-[ext_resource type="Script" uid="uid://daus05o80vtdl" path="res://Scripts/Backgrounds/dust_spawner.gd" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://daus05o80vtdl" path="res://Scripts/Managers/dust_spawner.gd" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://kli6bomgjfy0" path="res://Scenes/Dust/ice_dust.tscn" id="7_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://cihu7orwtkgci" path="res://Scenes/Background/blob_spawner.tscn" id="9_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://dd6g7soyjbnj8" path="res://assets/Background/p1.png" id="10_wsu2k"]
@@ -20,10 +21,19 @@
 [ext_resource type="Texture2D" uid="uid://3lnr4gkaquqd" path="res://assets/Background/g1.png" id="20_ueoa1"]
 [ext_resource type="Texture2D" uid="uid://ivahtnmenyjp" path="res://assets/Background/g2.png" id="21_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://c3fx7qmmw688n" path="res://assets/Background/g3.png" id="22_7k868"]
+[ext_resource type="PackedScene" uid="uid://daqeycmvn2fl8" path="res://Scenes/Enemy/steven.tscn" id="22_ee4r6"]
 [ext_resource type="PackedScene" uid="uid://pi6tnlga1wc3" path="res://Scenes/Enemy/james.tscn" id="23_cbgmd"]
 [ext_resource type="Texture2D" uid="uid://c50km3rupmil6" path="res://assets/Background/g4.png" id="23_hpc6h"]
+[ext_resource type="PackedScene" uid="uid://ctts3n0wkc2qi" path="res://Scenes/Enemy/jimbo.tscn" id="24_1w6v2"]
 [ext_resource type="Texture2D" uid="uid://d1s7vjfasp8hy" path="res://assets/Background/black.png" id="24_3pmx8"]
+[ext_resource type="Script" uid="uid://dsk444qtggth7" path="res://Scripts/Managers/enemy_spawner.gd" id="25_u50mg"]
 [ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="25_ueoa1"]
+[ext_resource type="PackedScene" uid="uid://dun0ijl0jtw0c" path="res://Scenes/Enemy/sam.tscn" id="26_6vcvc"]
+[ext_resource type="PackedScene" uid="uid://kqmxm2jxk7pc" path="res://Scenes/Cards/card_manager.tscn" id="29_7k868"]
+[ext_resource type="Script" uid="uid://dtje1vxmo8re4" path="res://Scripts/Cards/card_manager.gd" id="30_hpc6h"]
+[ext_resource type="Script" uid="uid://cuk1ql8h45g8l" path="res://Scenes/xp_bar.gd" id="31_e08e2"]
+[ext_resource type="Texture2D" uid="uid://cpq7bpfj3ksfr" path="res://assets/bright.png" id="33_neg2b"]
+[ext_resource type="FontFile" uid="uid://cv88uxhah70tr" path="res://EdgeOfTheGalaxyRegular-OVEa6.otf" id="34_neg2b"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_81s07"]
 distance = -596.0
@@ -46,7 +56,8 @@ uniform float blur_amount = 5.0;
 
 void fragment() {
 	vec3 result = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount).rgb;
-	COLOR.rgb = result;
+	vec3 other_result = vec3(result.r * 0.6, result.g * 0.6, result.b * 0.6);
+	COLOR.rgb = other_result;
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_81s07"]
@@ -61,6 +72,12 @@ colors = PackedColorArray(0.112900004, 0.07050001, 0.15, 1, 0.3310416, 0.1225000
 gradient = SubResource("Gradient_wsu2k")
 use_hdr = true
 
+[sub_resource type="LabelSettings" id="LabelSettings_d2k27"]
+font = ExtResource("34_neg2b")
+
+[sub_resource type="LabelSettings" id="LabelSettings_e08e2"]
+font = ExtResource("34_neg2b")
+
 [node name="Main" type="Node2D" unique_id=815726003]
 
 [node name="Asteroid" parent="." unique_id=1784187997 instance=ExtResource("1_jjgbg")]
@@ -68,7 +85,8 @@ unique_name_in_owner = true
 z_index = 500
 
 [node name="MainCam" type="Camera2D" parent="Asteroid" unique_id=1600353609]
-zoom = Vector2(6, 6)
+unique_name_in_owner = true
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 12.705
 
@@ -102,39 +120,37 @@ p4 = ExtResource("13_b3802")
 p5 = ExtResource("14_fevyy")
 
 [node name="Dust_Spawner" type="Node" parent="." unique_id=1317305004]
+unique_name_in_owner = true
 script = ExtResource("7_6bp64")
 meteor = ExtResource("4_344ge")
 ice = ExtResource("7_d1ilt")
 fire = ExtResource("6_hptm8")
 water = ExtResource("5_ynf5e")
 
-[node name="James" parent="." unique_id=334731642 instance=ExtResource("23_cbgmd")]
-collision_mask = 144
-
-[node name="Neil" parent="." unique_id=1441246960 instance=ExtResource("25_ueoa1")]
-position = Vector2(-35, 7)
-collision_mask = 144
-
 [node name="Node2D" type="StaticBody2D" parent="." unique_id=983620064]
 collision_layer = 64
 collision_mask = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=791870499]
+z_index = 2000
 position = Vector2(1258, -335.5)
 scale = Vector2(1, 2.3633406)
 texture = ExtResource("24_3pmx8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=1065857568]
+z_index = 2000
 position = Vector2(-343.0001, -1061)
 scale = Vector2(1.9162225, 1)
 texture = ExtResource("24_3pmx8")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=1087304651]
+z_index = 2000
 position = Vector2(225.00002, 1061)
 scale = Vector2(1.9352628, 1)
 texture = ExtResource("24_3pmx8")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Node2D" unique_id=1106560418]
+z_index = 2000
 position = Vector2(-1256, 82.99994)
 scale = Vector2(1, 2.3904552)
 texture = ExtResource("24_3pmx8")
@@ -167,6 +183,54 @@ offset_bottom = 140.0
 
 [node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
 z_index = -1980
-position = Vector2(0.49996948, -1.0000038)
+position = Vector2(3.8146973e-06, -49)
 scale = Vector2(2.933594, 372)
 texture = SubResource("GradientTexture1D_81s07")
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=1482946410]
+unique_name_in_owner = true
+script = ExtResource("25_u50mg")
+one = ExtResource("26_6vcvc")
+two = ExtResource("23_cbgmd")
+three = ExtResource("24_1w6v2")
+four = ExtResource("25_ueoa1")
+five = ExtResource("22_ee4r6")
+
+[node name="CardManager" parent="." unique_id=2043350659 instance=ExtResource("29_7k868")]
+script = ExtResource("30_hpc6h")
+
+[node name="XP_BAR" type="Area2D" parent="." unique_id=1681822591]
+z_index = 2400
+z_as_relative = false
+script = ExtResource("31_e08e2")
+
+[node name="BackgroundBar" type="Sprite2D" parent="XP_BAR" unique_id=28472275]
+position = Vector2(1, -137)
+scale = Vector2(8.82, 1.44)
+texture = ExtResource("2_hpc6h")
+
+[node name="Move" type="Sprite2D" parent="XP_BAR" unique_id=1879342832]
+unique_name_in_owner = true
+position = Vector2(-468.62503, -168.75)
+scale = Vector2(11.065001, 2.71)
+texture = ExtResource("33_neg2b")
+
+[node name="Level" type="Label" parent="XP_BAR" unique_id=896738949]
+unique_name_in_owner = true
+offset_left = -241.0
+offset_top = -99.0
+offset_right = -148.0
+offset_bottom = -76.0
+text = "Level 5"
+label_settings = SubResource("LabelSettings_d2k27")
+horizontal_alignment = 2
+
+[node name="OutOf" type="Label" parent="XP_BAR" unique_id=1494345218]
+unique_name_in_owner = true
+visible = false
+offset_left = -188.0
+offset_top = -98.0
+offset_right = -92.0
+offset_bottom = -75.0
+text = "20/60"
+label_settings = SubResource("LabelSettings_e08e2")

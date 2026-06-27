@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://hxx867qdoob4"]
+
+[ext_resource type="PackedScene" uid="uid://b5efx40vevk3d" path="res://Scenes/Bullets/bullet.tscn" id="1_qdrr0"]
+[ext_resource type="Script" uid="uid://c1tvhq5t427h1" path="res://Scenes/Bullets/explosion.gd" id="2_fyqen"]
+[ext_resource type="Texture2D" uid="uid://d1xkfturjw2oj" path="res://assets/Particles/explosion_img.png" id="3_d763w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_muhhp"]
+radius = 24.020824
+
+[node name="Explosion" unique_id=2113119815 instance=ExtResource("1_qdrr0")]
+scale = Vector2(2.03, 2.03)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_fyqen")
+health = 1000
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1349771428]
+shape = SubResource("CircleShape2D_muhhp")
+
+[node name="Sprite2D" parent="." index="1" unique_id=451859053]
+modulate = Color(1, 1, 1, 0.47058824)
+texture = ExtResource("3_d763w")

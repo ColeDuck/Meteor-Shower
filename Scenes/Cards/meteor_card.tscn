@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cdnrgye230y8k"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_01gqq"]
+[ext_resource type="Script" uid="uid://dqh0sqi2th77a" path="res://Scripts/Cards/meteor_card.gd" id="2_it6kl"]
+
+[node name="MeteorCard" unique_id=937178695 instance=ExtResource("1_01gqq")]
+script = ExtResource("2_it6kl")

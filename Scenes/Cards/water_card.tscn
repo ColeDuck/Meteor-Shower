@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://42nv6f8rji08"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_nq5e7"]
+[ext_resource type="Script" uid="uid://cr0vyu7aupjar" path="res://Scripts/Cards/water_card.gd" id="2_5d6iq"]
+
+[node name="WaterCard" unique_id=937178695 instance=ExtResource("1_nq5e7")]
+script = ExtResource("2_5d6iq")

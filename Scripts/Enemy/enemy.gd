@@ -15,21 +15,27 @@ var bubble_vector: Vector2 # Stores angle that we were hit at
 @export var animator: AnimatedSprite2D
 @export var bubble: Sprite2D
 @export var ice: Sprite2D
-var frost_particle: PackedScene = preload("res://Scenes/Particles/frost_bite_particle.tscn")
-var burn_particle: PackedScene
-var explode: PackedScene
-var shatter: PackedScene
-var vaporize: PackedScene
+@export var explode: PackedScene
+@export var shatter: PackedScene
+@export var vaporize: PackedScene
+
+@export var death: PackedScene
 
 var health: float
 var damage: float
 var speed: float
 
-var p: GPUParticles2D # Stores whatever current particle we are emitting
+var colorF: Vector3 = Vector3(1.0,1.0,1.0)
+var last_change: int
+
+var enemy_controller
+var mat: ShaderMaterial
+var can_damage = true
 
 @export var player: Asteroid
 
 func _ready() -> void:
+	mat = material
 	health = base_health * StatManager.enemy_health_mult
 	damage = base_damage * StatManager.enemy_damage_mult
 	speed = base_speed * StatManager.enemy_speed_mult
@@ -37,6 +43,9 @@ func _ready() -> void:
 	bubble.visible = false
 	ice.visible = false
 	animator.play("Move")
+	
+	mat = animator.shader_material
+	mat.set("shader_parameter/intensity",0.0);
 	
 	player = Asteroid.instance
 
@@ -80,7 +89,13 @@ func move(delta: float, speed_mult: float) -> void:
 	var saved = velocity
 	move_and_slide()
 	
-	
+	for i in get_slide_collision_count():
+		var coll = get_slide_collision(i)
+		if coll.get_collider() is Asteroid:
+			if can_damage:
+				player.damage(damage)
+				can_damage = false
+			queue_free()
 	
 	velocity = saved
 
@@ -93,12 +108,27 @@ func move(delta: float, speed_mult: float) -> void:
 func bubble_move(delta: float) -> void:
 	position += bubble_vector * delta * StatManager.bubble_speed
 	
+func flash():
+	var time_changed = Time.get_ticks_msec()
+	last_change = time_changed
+	mat.set("shader_parameter/tint_color",colorF);
+	mat.set("shader_parameter/intensity",0.7);
+	await get_tree().create_timer(0.2).timeout
+	
+	if last_change == time_changed:
+		mat.set("shader_parameter/intensity",0.0);
+	
 func damage_me(damage: float) -> void:
 	health -= damage * StatManager.all_damage_mult
-	
+	flash()
 	if health <= 0:
 		# Animation?
 		# Particle?
+		player.killed_enemy()
+		var explosion_particle = death.instantiate()
+		explosion_particle.emitting = true
+		explosion_particle.global_position = global_position
+		add_sibling(explosion_particle)
 		queue_free() # Die
 	
 	# Play damage amimation here
@@ -113,26 +143,35 @@ func start_reaction(new_infliction: String):
 		infliction = "frozen"
 		ice.visible = true
 		infliction_so_far = 0
-		infliction_length = randf_range(StatManager.min_infliction_time,StatManager.max_infliction_time)
-		
-		p = frost_particle.instantiate()
-		p.emitting = true
+		infliction_length = StatManager.frozen_infliction_time
 		
 		return
-	# Burn + Bubble = vaporize
+	# Burn + Bubble = vapemelt
 	elif i == "burn" and ii == "bubble" or i == "bubble" and ii == "burn":
+		var b: Bullet = vaporize.instantiate()
+		b.global_position = global_position
+		add_sibling(b)
 		end_infliction()
 		return
-	# frostbite + bubble = melt
-	elif i == "frostbite" and ii == "bubble" or i == "bubble" and ii == "frostbite":
+	# frostbite + burn = vapemelt
+	elif i == "burn" and ii == "frostbite" or i == "frostbite" and ii == "burn":
+		var b: Bullet = vaporize.instantiate()
+		b.global_position = global_position
+		add_sibling(b)
 		end_infliction()
 		return
 	# freeze + meteor = shatter
 	elif i == "freeze" and ii == "meteor":
+		var b: Bullet = shatter.instantiate()
+		b.global_position = global_position
+		add_sibling(b)
 		end_infliction()
 		return
 	# meteor + burn = explode
-	elif i == "meteor" and ii == "burn":
+	elif ii == "meteor" and i == "burn":
+		var b: Bullet = explode.instantiate()
+		b.global_position = global_position
+		add_sibling(b)
 		end_infliction()
 		return
 	 
@@ -145,17 +184,19 @@ func start_infliction(type: String, bullet: Bullet):
 	
 	# Free the old p
 	#kill_p()
-	
-	if type == "burn":
-		# burnparticle spawn
+	if type == "meteor":
+			colorF = Vector3(0.634, 0.328, 0.141)
+			#Color(0.634, 0.328, 0.141, 1.0)
+			return
+	elif type == "burn":
+		colorF = Vector3(1.0,0,0)
 		return
 	elif type == "frostbite":
-		p = frost_particle.instantiate()
-		add_sibling(p)
+		colorF = Vector3(0.638, 0.826, 0.936)
 		return
 		
 	elif type == "bubble":
-		print(bubble)
+		colorF = Vector3(0.0, 0.0, 1.0,)
 		bubble.visible = true
 		bubble_vector = bullet.velocity.normalized()
 		return
@@ -166,8 +207,6 @@ func end_infliction():
 	infliction = ""
 	bubble.visible = false
 	ice.visible = false
-	if p != null:
-		p.emitting = false
 	infliction_so_far = 0
 	infliction_length = 1
 
@@ -177,18 +216,17 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var b: Bullet = area
 	b.destroy()
 
-	damage_me(b.damage())
-	
 	# We need to be inflicted!
 	var new_infliction = b.infliction()
 	if infliction == "":
 		end_infliction() # Just in case
 		# Meteors don't inflict, they only cause reactions
-		if new_infliction == "meteor":
-			return
+		
 			
 		start_infliction(new_infliction, b)
-		return
+	else:
+		# On noes! We need to do an element reaction!
+		start_reaction(new_infliction)
 	
-	# On noes! We need to do an element reaction!
-	start_reaction(new_infliction)
+	damage_me(b.damage())
+	

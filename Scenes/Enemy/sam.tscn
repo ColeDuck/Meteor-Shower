@@ -5,6 +5,24 @@
 [ext_resource type="Texture2D" uid="uid://deju4c3qmh0fo" path="res://assets/Particles/small_bubble.png" id="3_qqgxk"]
 [ext_resource type="Texture2D" uid="uid://crbj4s4ukq0ar" path="res://assets/Particles/Small_Ice.png" id="4_2epeh"]
 
+[sub_resource type="Shader" id="Shader_qqgxk"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec3 tint_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform float intensity : hint_range(0, 1) = 1.0;
+
+void fragment(){
+    vec4 front = texture(TEXTURE, UV);
+    COLOR = mix(front, vec4(tint_color, front.a), intensity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2epeh"]
+resource_local_to_scene = true
+shader = SubResource("Shader_qqgxk")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 1.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqgxk"]
 atlas = ExtResource("2_pmmge")
 region = Rect2(0, 0, 14, 14)
@@ -48,11 +66,12 @@ size = Vector2(20, 17)
 radius = 8.0
 
 [node name="Sam" unique_id=334731642 instance=ExtResource("1_s2a3s")]
-base_health = 14.47
-base_damage = 4.78
-base_speed = 24.845
+base_health = 5.0
+base_damage = 5.0
+base_speed = 33.24
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+material = SubResource("ShaderMaterial_2epeh")
 sprite_frames = SubResource("SpriteFrames_dmwl5")
 animation = &"Move"
 frame_progress = 0.30424726
@@ -71,5 +90,5 @@ texture = ExtResource("4_2epeh")
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_tlweo")
 
-[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+[node name="AvoidShape" parent="." index="4" unique_id=170604090]
 shape = SubResource("CircleShape2D_nf8j8")

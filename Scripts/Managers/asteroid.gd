@@ -33,6 +33,12 @@ var Arrow: Sprite2D
 
 var radius: float = 10
 
+var dust_spawner
+var last_change: int
+
+var xp: float = 0
+var level: int = 1
+
 static var instance: Asteroid  # a self-registering singleton
 
 @export var iron_scene: PackedScene
@@ -46,6 +52,7 @@ func _ready():
 	copy = %CopyForBoundary
 	Camera = $MainCam
 	Arrow = $Arrow
+	dust_spawner = %Dust_Spawner
 	add_iron(5)
 
 func calculate_radius_up(matter: Matter) -> void:
@@ -92,6 +99,7 @@ func collect_dust(dust: Dust) -> void:
 	calculate_radius_up(matter)
 	add_child(matter, false)
 	dust.remove()
+	dust_spawner.total_dust -= 1
 	
 func add_iron(amount: int) -> void:
 	for i in range(amount):
@@ -111,11 +119,33 @@ func add_iron(amount: int) -> void:
 		# We need to set index all the way up here!
 		allocated = amount
 
+func damage(amount: int) -> void:
+	print("ow")
+	for i in range(0,amount):
+		remove_from_storage()
+	
+	if allocated != 0:
+		calculate_radius_down(storage.get(allocated - 1))
+	flash()
+	
+func flash():
+	var time_changed = Time.get_ticks_msec()
+	last_change = time_changed
+	material.set("shader_parameter/tint_color",Vector3(255,0,0));
+	material.set("shader_parameter/intensity",1.0);
+	await get_tree().create_timer(0.2).timeout
+	
+	if last_change == time_changed:
+		material.set("shader_parameter/intensity",0.0);
+
 func _physics_process(delta: float) -> void:
-	var current = Camera.zoom.x
-	var new_zoom = lerp(current, 100/radius, 4 * delta)
-	new_zoom = min(5, new_zoom)
-	Camera.zoom = Vector2(new_zoom, new_zoom)
+	ROTATION_SPEED = StatManager.rotation_acceleration
+	OPPOSITE_ROTATION_SPEED = ROTATION_SPEED * 4
+	ACCELERATION = StatManager.acceleration
+	MAX_SPEED = StatManager.max_velocity
+	
+	
+	storage_size = StatManager.max_matter_storage
 	
 	# Handle inputs
 	if Input.is_action_pressed("RotateRight"):
@@ -151,6 +181,7 @@ func _physics_process(delta: float) -> void:
 	# Apply rotation
 	rotation += rotational_velocity * delta
 	rotational_velocity *= 0.999
+	rotational_velocity = max(min(StatManager.max_rotation, rotational_velocity), -StatManager.max_rotation)
 	# Move along rotation
 	
 	velocity = movement_direction
@@ -159,17 +190,17 @@ func _physics_process(delta: float) -> void:
 		# This has to be a world collision so, reflect on that!
 		# Up and down
 		if m.get_normal().abs().is_equal_approx(Vector2(0,1)):
-			print("here")
 			movement_direction *= Vector2(1,-1)
 		elif m.get_normal().abs().is_equal_approx(Vector2(1,0)):
-			print("meow")
 			movement_direction *= Vector2(-1,1)
 	move_and_collide(velocity * delta, false)
 	# Calculate eject
 	bullet_eject_buildup += 100 * abs(pow(rotational_velocity, 2)) * delta
 	#print(bullet_eject_buildup)
 	if (bullet_eject_buildup > MAX_BUILDUP):
-		shoot()
+		for i in range(0, StatManager.bullet_streams):
+			if (Input.is_action_pressed("Shoot")):
+				shoot(i * PI/2)
 		
 	Arrow.top_level = true
 	Arrow.rotation = rotation
@@ -180,8 +211,7 @@ func _physics_process(delta: float) -> void:
 	var direction_from_center: Vector2 = Vector2.from_angle(rotation).normalized() * 1.2
 	Arrow.position = (radius * direction_from_center) + global_position
 		
-func shoot() -> void:
-	print(storage)
+func shoot(angle_change: float) -> void:
 	bullet_eject_buildup = 0
 	if (allocated == 0):
 		#print("You are dead")
@@ -194,7 +224,7 @@ func shoot() -> void:
 		# We are iron, do nothing
 		return
 	
-	var a: Vector2 = Vector2.from_angle(rotation).normalized()
+	var a: Vector2 = Vector2.from_angle(rotation + angle_change).normalized()
 	bullet.position = radius * a + global_position
 	if rotational_velocity > 0:
 		# Left
@@ -212,15 +242,36 @@ func shoot() -> void:
 	bullet.top_level = true
 	add_child(bullet, false)
 	
+	if matter.destroy():
+		remove_from_storage()
+		
+	calculate_radius_down(storage.get(allocated - 1))
+
+func killed_enemy():
+	xp += round(StatManager.xp_mult * 1)
+	if abs(xp - StatManager.xp_required) < 1:
+		level_up()
+		xp = 0
+		StatManager.xp_required = pow(1.8, level / 2.0) + 2
+	
+	
+func level_up():
+	level += 1
+	# Pause Game
+	# Show cards
+	# Upgrade chosen card
+	# Unpause game
+	# idk
+	pass
+
+func remove_from_storage():
+	if (allocated == 0):
+		print("You are dead")
+		return
+	
 	storage[allocated - 1].queue_free()
 	storage.remove_at(allocated - 1)
 	allocated -= 1
-	
-	if (allocated == 0):
-		#print("You are dead")
-		return
-		
-	calculate_radius_down(storage.get(allocated - 1))
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is Dust:

@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://dunyn087vdmgl"]
 
+[ext_resource type="Shader" uid="uid://3tyrmbsjlosq" path="res://Scripts/Managers/asteroid.gdshader" id="1_4hu71"]
 [ext_resource type="Script" uid="uid://b58rofoodynso" path="res://Scripts/Managers/asteroid.gd" id="1_a2bka"]
 [ext_resource type="Texture2D" uid="uid://xvkvrtrcwfe5" path="res://assets/Arrow.png" id="2_a2bka"]
 [ext_resource type="PackedScene" uid="uid://dswpr3tals8vk" path="res://Scenes/Matter/iron_matter.tscn" id="2_m5q5l"]
+[ext_resource type="Script" uid="uid://c8l40x6d73rpq" path="res://Scenes/Managers/area_2d.gd" id="5_l1mbo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ueoa1"]
+shader = ExtResource("1_4hu71")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_81s07"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_82ykm"]
 
 [node name="Asteroid" type="CharacterBody2D" unique_id=616925978]
+material = SubResource("ShaderMaterial_ueoa1")
 collision_layer = 16
 collision_mask = 65
 script = ExtResource("1_a2bka")
@@ -22,6 +30,7 @@ texture = ExtResource("2_a2bka")
 [node name="Area2D" type="Area2D" parent="." unique_id=394897668]
 collision_layer = 16
 collision_mask = 9
+script = ExtResource("5_l1mbo")
 
 [node name="AsteroidHitbox" type="CollisionShape2D" parent="Area2D" unique_id=1574058614]
 unique_name_in_owner = true

@@ -5,6 +5,24 @@
 [ext_resource type="Texture2D" uid="uid://i2w37lcuyx8j" path="res://assets/Particles/big_bubble.png" id="3_3n5fi"]
 [ext_resource type="Texture2D" uid="uid://brg2do1e271uf" path="res://assets/Particles/big_ice.png" id="4_keoai"]
 
+[sub_resource type="Shader" id="Shader_3rv0y"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec3 tint_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform float intensity : hint_range(0, 1) = 1.0;
+
+void fragment(){
+    vec4 front = texture(TEXTURE, UV);
+    COLOR = mix(front, vec4(tint_color, front.a), intensity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_waxn7"]
+resource_local_to_scene = true
+shader = SubResource("Shader_3rv0y")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 1.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wvbo0"]
 atlas = ExtResource("2_waxn7")
 region = Rect2(0, 0, 20, 20)
@@ -51,11 +69,12 @@ height = 22.0
 [node name="Neil" unique_id=334731642 instance=ExtResource("1_3rv0y")]
 rotation = 1.5707964
 motion_mode = 1
-base_health = 5.725
-base_damage = 14.62
-base_speed = 77.965
+base_health = 1.0
+base_damage = 50.0
+base_speed = 79.03
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+material = SubResource("ShaderMaterial_waxn7")
 sprite_frames = SubResource("SpriteFrames_xjkf8")
 animation = &"Move"
 frame_progress = 0.61398035
@@ -73,5 +92,5 @@ texture = ExtResource("4_keoai")
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jli3k")
 
-[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+[node name="AvoidShape" parent="." index="4" unique_id=170604090]
 shape = SubResource("CapsuleShape2D_3rv0y")

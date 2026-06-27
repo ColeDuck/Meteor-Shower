@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://blvq4pvce6jq4"]
+
+[ext_resource type="Script" uid="uid://c56sjrko302uu" path="res://Scripts/Enemy/enemy.gd" id="1_nvvbs"]
+[ext_resource type="Shader" uid="uid://c6ep7aytf28tn" path="res://Scenes/Enemy/enemy.gdshader" id="2_2t2r4"]
+[ext_resource type="PackedScene" uid="uid://hxx867qdoob4" path="res://Scenes/Bullets/explosion.tscn" id="2_gx76c"]
+[ext_resource type="Script" uid="uid://cydq6jhjwn52p" path="res://Scripts/Enemy/animated_sprite_2d.gd" id="3_dmwl5"]
+[ext_resource type="PackedScene" uid="uid://bfoc3knkejkb2" path="res://Scenes/Bullets/shatter.tscn" id="3_pqgp3"]
+[ext_resource type="PackedScene" uid="uid://g8odjw3bygyl" path="res://Scenes/Bullets/vape_melt.tscn" id="4_4ad2a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvvbs"]
+resource_local_to_scene = true
+shader = ExtResource("2_2t2r4")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 1.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=129278397 node_paths=PackedStringArray("animator", "bubble", "ice")]
+collision_layer = 128
+collision_mask = 144
+script = ExtResource("1_nvvbs")
+base_health = null
+base_damage = null
+base_speed = null
+animator = NodePath("AnimatedSprite2D")
+bubble = NodePath("bubble")
+ice = NodePath("ice")
+explode = ExtResource("2_gx76c")
+shatter = ExtResource("3_pqgp3")
+vaporize = ExtResource("4_4ad2a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1536105433]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_nvvbs")
+script = ExtResource("3_dmwl5")
+
+[node name="bubble" type="Sprite2D" parent="." unique_id=1951337497]
+modulate = Color(1, 1, 1, 0.6509804)
+
+[node name="ice" type="Sprite2D" parent="." unique_id=1752232193]
+modulate = Color(1, 1, 1, 0.65882355)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1376675364]
+collision_mask = 2
+
+[node name="HitBox" type="CollisionShape2D" parent="Area2D" unique_id=774346043]
+
+[node name="AvoidShape" type="CollisionShape2D" parent="." unique_id=170604090]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://rs21himvbn07"]
+
+[ext_resource type="Texture2D" uid="uid://bex0g1yfqk66m" path="res://assets/Particles/explode_part.png" id="1_lh1m4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_82ykm"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ccgfw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2848837, 1), 0.0, 0.0, 0, 0, Vector2(0.76744187, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_h6qkg"]
+curve = SubResource("Curve_ccgfw")
+
+[sub_resource type="Curve" id="Curve_dmqox"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7732558, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_omo1k"]
+curve = SubResource("Curve_dmqox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_81s07"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = 0.295
+spread = 180.0
+flatness = 0.7
+initial_velocity_min = 10.23
+initial_velocity_max = 43.469997
+gravity = Vector3(0, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_omo1k")
+alpha_curve = SubResource("CurveTexture_h6qkg")
+anim_offset_max = 1.0
+
+[node name="Death" type="GPUParticles2D" unique_id=1881488494]
+material = SubResource("CanvasItemMaterial_82ykm")
+emitting = false
+amount = 110
+texture = ExtResource("1_lh1m4")
+lifetime = 2.0599999999999996
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_81s07")

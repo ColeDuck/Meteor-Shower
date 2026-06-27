@@ -5,6 +5,24 @@
 [ext_resource type="Texture2D" uid="uid://i2w37lcuyx8j" path="res://assets/Particles/big_bubble.png" id="3_pyaqu"]
 [ext_resource type="Texture2D" uid="uid://brg2do1e271uf" path="res://assets/Particles/big_ice.png" id="4_5xc2b"]
 
+[sub_resource type="Shader" id="Shader_pyaqu"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec3 tint_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform float intensity : hint_range(0, 1) = 1.0;
+
+void fragment(){
+    vec4 front = texture(TEXTURE, UV);
+    COLOR = mix(front, vec4(tint_color, front.a), intensity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xc2b"]
+resource_local_to_scene = true
+shader = SubResource("Shader_pyaqu")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 1.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgeqe"]
 atlas = ExtResource("2_y1j2x")
 region = Rect2(0, 0, 30, 30)
@@ -48,11 +66,12 @@ size = Vector2(22, 30)
 size = Vector2(20, 11)
 
 [node name="Steven" unique_id=334731642 instance=ExtResource("1_ei5v6")]
-base_health = 48.445
-base_damage = 32.25
-base_speed = 54.36
+base_health = 200.0
+base_damage = 30.0
+base_speed = 60.22
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
+material = SubResource("ShaderMaterial_5xc2b")
 sprite_frames = SubResource("SpriteFrames_nvvbs")
 animation = &"Move"
 frame_progress = 0.50584507
@@ -71,6 +90,6 @@ texture = ExtResource("4_5xc2b")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_nvvbs")
 
-[node name="AvoidShape" parent="." index="5" unique_id=170604090]
+[node name="AvoidShape" parent="." index="4" unique_id=170604090]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_uim2h")

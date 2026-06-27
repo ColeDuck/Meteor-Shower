@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://io4la1g6n6bm"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_asf1j"]
+[ext_resource type="Script" uid="uid://br82sg8b1skuh" path="res://Scripts/Cards/fire_card.gd" id="2_f1qsw"]
+
+[node name="FireCard" unique_id=937178695 instance=ExtResource("1_asf1j")]
+script = ExtResource("2_f1qsw")
