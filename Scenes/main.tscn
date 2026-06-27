@@ -20,12 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://3lnr4gkaquqd" path="res://assets/Background/g1.png" id="20_ueoa1"]
 [ext_resource type="Texture2D" uid="uid://ivahtnmenyjp" path="res://assets/Background/g2.png" id="21_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://c3fx7qmmw688n" path="res://assets/Background/g3.png" id="22_7k868"]
-[ext_resource type="PackedScene" uid="uid://daqeycmvn2fl8" path="res://Scenes/Enemy/steven.tscn" id="22_ee4r6"]
 [ext_resource type="PackedScene" uid="uid://pi6tnlga1wc3" path="res://Scenes/Enemy/james.tscn" id="23_cbgmd"]
 [ext_resource type="Texture2D" uid="uid://c50km3rupmil6" path="res://assets/Background/g4.png" id="23_hpc6h"]
-[ext_resource type="PackedScene" uid="uid://ctts3n0wkc2qi" path="res://Scenes/Enemy/jimbo.tscn" id="24_1w6v2"]
 [ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="25_ueoa1"]
-[ext_resource type="PackedScene" uid="uid://dun0ijl0jtw0c" path="res://Scenes/Enemy/sam.tscn" id="26_6vcvc"]
 
 [sub_resource type="Shader" id="Shader_gt3je"]
 code = "shader_type canvas_item;
@@ -43,21 +40,21 @@ shader = SubResource("Shader_gt3je")
 shader_parameter/blur_amount = 2.475
 
 [sub_resource type="Gradient" id="Gradient_wsu2k"]
-offsets = PackedFloat32Array(0.19924812, 0.4924812, 0.7180451)
+offsets = PackedFloat32Array(0.40225562, 0.5, 0.55263156)
 colors = PackedColorArray(0.112900004, 0.07050001, 0.15, 1, 0.3310416, 0.12250001, 0.35, 1, 0.26048478, 0.080297284, 0.2347404, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_81s07"]
 gradient = SubResource("Gradient_wsu2k")
 use_hdr = true
 
-[node name="Main" type="Node2D" unique_id=159807266]
+[node name="Main" type="Node2D" unique_id=815726003]
 
 [node name="Asteroid" parent="." unique_id=1784187997 instance=ExtResource("1_jjgbg")]
 unique_name_in_owner = true
 z_index = 500
 
 [node name="MainCam" type="Camera2D" parent="Asteroid" unique_id=1600353609]
-zoom = Vector2(3, 3)
+zoom = Vector2(6, 6)
 position_smoothing_enabled = true
 position_smoothing_speed = 12.705
 
@@ -78,8 +75,8 @@ offset_bottom = 140.0
 
 [node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
 z_index = -1980
-position = Vector2(12.000008, 0.49999046)
-scale = Vector2(1.9062501, 337.00003)
+position = Vector2(0.49996948, -1.0000038)
+scale = Vector2(2.933594, 372)
 texture = SubResource("GradientTexture1D_81s07")
 
 [node name="Lue" parent="." unique_id=108679059 instance=ExtResource("9_jkdf5")]
@@ -113,43 +110,8 @@ ice = ExtResource("7_d1ilt")
 fire = ExtResource("6_hptm8")
 water = ExtResource("5_ynf5e")
 
-[node name="Neil" parent="." unique_id=1023679852 instance=ExtResource("25_ueoa1")]
-position = Vector2(-163, -7)
-
-[node name="Neil2" parent="." unique_id=1293960007 instance=ExtResource("25_ueoa1")]
-position = Vector2(174, -3)
-
-[node name="Neil3" parent="." unique_id=467768029 instance=ExtResource("25_ueoa1")]
-position = Vector2(46, -97)
-
-[node name="Neil4" parent="." unique_id=2111559261 instance=ExtResource("25_ueoa1")]
-position = Vector2(-44, -98)
-
-[node name="Neil5" parent="." unique_id=142496845 instance=ExtResource("25_ueoa1")]
-position = Vector2(-15, 95)
-
-[node name="Neil6" parent="." unique_id=2022757001 instance=ExtResource("25_ueoa1")]
-position = Vector2(105, 64)
-
-[node name="Neil7" parent="." unique_id=1547652530 instance=ExtResource("25_ueoa1")]
-position = Vector2(-119, 60)
-
-[node name="Neil8" parent="." unique_id=929016202 instance=ExtResource("25_ueoa1")]
-position = Vector2(101, -55)
-
-[node name="Neil9" parent="." unique_id=226092037 instance=ExtResource("25_ueoa1")]
-position = Vector2(-83, -34)
-
 [node name="James" parent="." unique_id=334731642 instance=ExtResource("23_cbgmd")]
+collision_mask = 144
 
-[node name="Jimbo" parent="." unique_id=802578041 instance=ExtResource("24_1w6v2")]
-position = Vector2(167, 72)
-
-[node name="Neil10" parent="." unique_id=1052445865 instance=ExtResource("25_ueoa1")]
-position = Vector2(99, -97)
-
-[node name="Sam" parent="." unique_id=1087974040 instance=ExtResource("26_6vcvc")]
-position = Vector2(-150, -78)
-
-[node name="Steven" parent="." unique_id=204614169 instance=ExtResource("22_ee4r6")]
-position = Vector2(-174, 41)
+[node name="Neil" parent="." unique_id=1441246960 instance=ExtResource("25_ueoa1")]
+collision_mask = 144

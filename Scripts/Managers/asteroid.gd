@@ -30,9 +30,11 @@ var Collider: CollisionShape2D
 var Camera: Camera2D
 var Arrow: Sprite2D
 
-var radius: float = 1
+var radius: float = 10
 
 static var instance: Asteroid  # a self-registering singleton
+
+@export var iron_scene: PackedScene
 
 func _exit_tree():
 	instance = null
@@ -42,16 +44,29 @@ func _ready():
 	Collider = $AsteroidHitbox
 	Camera = $MainCam
 	Arrow = $Arrow
+	add_iron(5)
 
-func calculate_radius(matter: Matter) -> void:
-	radius = matter.position.length()
-	Collider.shape.radius = max(1,radius)
-	
-	#Camera.zoom = Vector2(100/radius,100/radius)
+func calculate_radius_up(matter: Matter) -> void:
+	var new_radius = matter.position.length()
+	if (new_radius > radius):
+		radius = max(10,new_radius)
+		Collider.shape.radius = max(3,radius)
 	#print("pos: " + str(global_position))
 	#print("mat: " + str(matter.global_position.length()))
 	#print(new_hitbox_size)
 	
+func calculate_radius_down(matter: Matter) -> void:
+	var new_radius = matter.position.length()
+	if (new_radius < radius):
+		radius = max(10,new_radius)
+		Collider.shape.radius = max(3,radius)
+	
+func get_position_allocated(index: int) -> Vector2:
+	var c: float = 2.7 # Determines how tight the spiral is
+	var r = c * sqrt(index) # Idk
+	var theta = index * 2.39996 # Golden ratio?
+	var pos: Vector2 = Vector2(round(r * cos(theta)), round(r * sin(theta)))
+	return pos
 
 func collect_dust(dust: Dust) -> void:
 	# Get type
@@ -60,15 +75,8 @@ func collect_dust(dust: Dust) -> void:
 	# Do we have room?
 	if allocated >= storage_size:
 		return
-		
-	# Yes, determine location
-	var c: float = 2.7 # Determines how tight the spiral is
-	var r = c * sqrt(allocated) # Idk
-	var theta = allocated * 2.39996 # Golden ratio?
-	var pos: Vector2 = Vector2(round(r * cos(theta)), round(r * sin(theta)))
 	
-	matter.position = pos
-	#matter.Nugget.z_index = index + 1
+	matter.position = get_position_allocated(allocated)
 	matter.Outline.z_index = -1
 	
 	var rot = randi_range(0, 3)
@@ -77,11 +85,35 @@ func collect_dust(dust: Dust) -> void:
 	# Add to storage
 	storage.insert(allocated, matter)
 	allocated += 1
-	calculate_radius(matter)
+	calculate_radius_up(matter)
 	add_child(matter, false)
 	dust.remove()
+	
+func add_iron(amount: int) -> void:
+	for i in range(amount):
+		print(i)
+		if i < allocated:
+			storage.get(i).queue_free()
+		var new_iron: Matter = iron_scene.instantiate()
+		var pos = get_position_allocated(i)
+		new_iron.position = pos
+		new_iron.Outline.z_index = -1
+		var rot = randi_range(0, 3)
+		new_iron.rotation_degrees = 90 * rot
+		storage.insert(i, new_iron)
+		add_child(new_iron, false)
+	
+	if allocated < amount:
+		# We need to set index all the way up here!
+		allocated = amount
 
 func _physics_process(delta: float) -> void:
+	var current = Camera.zoom.x
+	var new_zoom = lerp(current, 100/radius, 4 * delta)
+	new_zoom = min(5, new_zoom)
+	Camera.zoom = Vector2(new_zoom, new_zoom)
+	print(new_zoom)
+	
 	# Handle inputs
 	if Input.is_action_pressed("RotateRight"):
 		if rotational_velocity > 0:
@@ -117,6 +149,7 @@ func _physics_process(delta: float) -> void:
 	rotation += rotational_velocity * delta
 	rotational_velocity *= 0.999
 	# Move along rotation
+	
 	position += movement_direction * delta
 	
 	# Calculate eject
@@ -133,10 +166,9 @@ func _physics_process(delta: float) -> void:
 		
 	var direction_from_center: Vector2 = Vector2.from_angle(rotation).normalized() * 1.2
 	Arrow.position = (radius * direction_from_center) + global_position
-	
-	
 		
 func shoot() -> void:
+	print(storage)
 	bullet_eject_buildup = 0
 	if (allocated == 0):
 		#print("You are dead")
@@ -144,6 +176,10 @@ func shoot() -> void:
 	
 	var matter: Matter = storage[allocated - 1]
 	var bullet: Bullet = matter.shoot()
+	
+	if bullet == null:
+		# We are iron, do nothing
+		return
 	
 	var a: Vector2 = Vector2.from_angle(rotation).normalized()
 	bullet.position = radius * a + global_position
@@ -153,9 +189,11 @@ func shoot() -> void:
 	else:
 		a = Vector2(a.y, -a.x)
 	
-
+	# Speed and direction
 	bullet.velocity = a
-	bullet.velocity *= 50 * abs(rotational_velocity)
+	bullet.velocity *= 30 * abs(rotational_velocity)
+	
+	# Movement
 	bullet.velocity += movement_direction
 	
 	bullet.top_level = true
@@ -169,10 +207,8 @@ func shoot() -> void:
 		#print("You are dead")
 		return
 		
-	calculate_radius(storage.get(allocated - 1))
+	calculate_radius_down(storage.get(allocated - 1))
 	
-
-
 func _on_area_entered(area: Area2D) -> void:
 	if area is Dust:
 		collect_dust(area)

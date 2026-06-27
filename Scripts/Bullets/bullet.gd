@@ -23,6 +23,13 @@ func destroy() -> void:
 	
 	# Destroy
 	var p: GPUParticles2D = smash_particle.duplicate()
+	
+	var mat = p.process_material as ParticleProcessMaterial
+	mat.initial_velocity_min = velocity.length()
+	mat.initial_velocity_max = velocity.length()
+	mat.direction = Vector3(velocity.x, velocity.y, 0).normalized()
+	mat.spread = 45.0 
+	
 	p.emitting = true
 	p.visible = true
 	p.global_position = global_position
@@ -47,6 +54,10 @@ func _ready():
 	smash_particle = $Smash
 	
 func _physics_process(delta: float) -> void:
+	if global_position.x < -600 or global_position.x > 600 or global_position.y > 600 or global_position.x < -600:
+		destroy()
+	
+	
 	position += velocity * delta
 	trail_particle.rotation = velocity.angle() + PI # Set dir of particles to opposite of movement direction
 	
@@ -59,5 +70,5 @@ func _physics_process(delta: float) -> void:
 		
 	time_alive += delta
 	if time_alive > 7:
-		queue_free()
+		destroy()
 		

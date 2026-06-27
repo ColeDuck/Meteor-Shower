@@ -2,19 +2,16 @@
 
 [ext_resource type="Script" uid="uid://b58rofoodynso" path="res://Scripts/Managers/asteroid.gd" id="1_a2bka"]
 [ext_resource type="Texture2D" uid="uid://xvkvrtrcwfe5" path="res://assets/Arrow.png" id="2_a2bka"]
-[ext_resource type="PackedScene" uid="uid://dswpr3tals8vk" path="res://Scenes/Matter/iron_matter.tscn" id="2_m5q5l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_81s07"]
 
-[node name="Asteroid" type="Area2D" unique_id=1190728855]
+[node name="Asteroid" type="Area2D" unique_id=317959770]
 collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_a2bka")
-iron_scene = ExtResource("2_m5q5l")
 
 [node name="AsteroidHitbox" type="CollisionShape2D" parent="." unique_id=1574058614]
 shape = SubResource("CircleShape2D_81s07")
-debug_color = Color(0.7587248, 0, 0.20195672, 1)
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=1179922900]
 z_index = 501

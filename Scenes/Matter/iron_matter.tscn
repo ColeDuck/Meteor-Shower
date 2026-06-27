@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dswpr3tals8vk"]
+
+[ext_resource type="PackedScene" uid="uid://3haaf3we43s0" path="res://Scenes/Matter/matter.tscn" id="1_52wuj"]
+[ext_resource type="Script" uid="uid://dv15ybqqg47od" path="res://Scripts/Matter/iron_matter.gd" id="2_dq3n7"]
+[ext_resource type="Texture2D" uid="uid://dtlorfqab62o7" path="res://assets/Matter/iron.png" id="3_52wuj"]
+[ext_resource type="Texture2D" uid="uid://c2mcjslsvsm5m" path="res://assets/Matter/iron_outline.png" id="4_xtqqq"]
+
+[node name="IronMatter" unique_id=1880103678 instance=ExtResource("1_52wuj")]
+script = ExtResource("2_dq3n7")
+
+[node name="Nugget" parent="." index="0" unique_id=573175117]
+texture = ExtResource("3_52wuj")
+
+[node name="Outline" parent="." index="1" unique_id=1458586969]
+texture = ExtResource("4_xtqqq")

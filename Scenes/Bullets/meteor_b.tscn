@@ -33,6 +33,7 @@ initial_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 damping_min = 12.244
 damping_max = 26.736002
+scale_max = 2.0
 alpha_curve = SubResource("CurveTexture_g1lo5")
 anim_offset_max = 1.0
 
@@ -46,7 +47,7 @@ particles_anim_loop = false
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.14, 0.71428573), 0.0, 0.0, 0, 0, Vector2(0.87499994, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ddlkj"]
+[sub_resource type="CurveTexture" id="CurveTexture_2bsbi"]
 curve = SubResource("Curve_x1qd7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j1iwk"]
@@ -61,7 +62,7 @@ angular_velocity_max = 46.639984
 gravity = Vector3(0, 0, 0)
 scale_min = 0.9
 scale_max = 1.1
-alpha_curve = SubResource("CurveTexture_ddlkj")
+alpha_curve = SubResource("CurveTexture_2bsbi")
 anim_offset_max = 1.0
 
 [node name="Meteor B" unique_id=2113119815 instance=ExtResource("1_ocacn")]
@@ -81,16 +82,16 @@ texture = ExtResource("3_4br6a")
 [node name="Smash" parent="." index="3" unique_id=1781158148]
 material = SubResource("CanvasItemMaterial_uim2h")
 emitting = false
-amount = 28
+amount = 22
 texture = ExtResource("5_j1iwk")
-lifetime = 0.91
+lifetime = 0.41000000000000003
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_q5pdp")
 
 [node name="Trail" parent="." index="4" unique_id=2081852064]
 material = SubResource("CanvasItemMaterial_2bsbi")
-amount = 255
+amount = 219
 texture = ExtResource("6_2bsbi")
 lifetime = 3.76
 process_material = SubResource("ParticleProcessMaterial_j1iwk")
