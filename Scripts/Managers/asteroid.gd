@@ -1,5 +1,5 @@
 class_name Asteroid
-extends Area2D
+extends CharacterBody2D
 
 # Movement
 var ROTATION_SPEED: float = 3
@@ -27,6 +27,7 @@ var allocated: int = 0
 var storage_size: int = 10000
 
 var Collider: CollisionShape2D
+var copy: CollisionShape2D
 var Camera: Camera2D
 var Arrow: Sprite2D
 
@@ -41,7 +42,8 @@ func _exit_tree():
 
 func _ready():
 	instance = self
-	Collider = $AsteroidHitbox
+	Collider = %AsteroidHitbox
+	copy = %CopyForBoundary
 	Camera = $MainCam
 	Arrow = $Arrow
 	add_iron(5)
@@ -51,6 +53,7 @@ func calculate_radius_up(matter: Matter) -> void:
 	if (new_radius > radius):
 		radius = max(10,new_radius)
 		Collider.shape.radius = max(3,radius)
+		copy.shape.radius = max(3,radius)
 	#print("pos: " + str(global_position))
 	#print("mat: " + str(matter.global_position.length()))
 	#print(new_hitbox_size)
@@ -60,6 +63,7 @@ func calculate_radius_down(matter: Matter) -> void:
 	if (new_radius < radius):
 		radius = max(10,new_radius)
 		Collider.shape.radius = max(3,radius)
+		copy.shape.radius = max(3,radius)
 	
 func get_position_allocated(index: int) -> Vector2:
 	var c: float = 2.7 # Determines how tight the spiral is
@@ -112,7 +116,6 @@ func _physics_process(delta: float) -> void:
 	var new_zoom = lerp(current, 100/radius, 4 * delta)
 	new_zoom = min(5, new_zoom)
 	Camera.zoom = Vector2(new_zoom, new_zoom)
-	print(new_zoom)
 	
 	# Handle inputs
 	if Input.is_action_pressed("RotateRight"):
@@ -150,8 +153,18 @@ func _physics_process(delta: float) -> void:
 	rotational_velocity *= 0.999
 	# Move along rotation
 	
-	position += movement_direction * delta
-	
+	velocity = movement_direction
+	var m = move_and_collide(velocity * delta, true)
+	if m != null:
+		# This has to be a world collision so, reflect on that!
+		# Up and down
+		if m.get_normal().abs().is_equal_approx(Vector2(0,1)):
+			print("here")
+			movement_direction *= Vector2(1,-1)
+		elif m.get_normal().abs().is_equal_approx(Vector2(1,0)):
+			print("meow")
+			movement_direction *= Vector2(-1,1)
+	move_and_collide(velocity * delta, false)
 	# Calculate eject
 	bullet_eject_buildup += 100 * abs(pow(rotational_velocity, 2)) * delta
 	#print(bullet_eject_buildup)
@@ -208,7 +221,7 @@ func shoot() -> void:
 		return
 		
 	calculate_radius_down(storage.get(allocated - 1))
-	
-func _on_area_entered(area: Area2D) -> void:
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is Dust:
 		collect_dust(area)

@@ -79,6 +79,9 @@ func move(delta: float, speed_mult: float) -> void:
 	velocity *= 0.98 
 	var saved = velocity
 	move_and_slide()
+	
+	
+	
 	velocity = saved
 
 	var target_angle = global_position.direction_to(player.global_position).angle() + PI/2

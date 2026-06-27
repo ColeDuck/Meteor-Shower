@@ -22,7 +22,21 @@
 [ext_resource type="Texture2D" uid="uid://c3fx7qmmw688n" path="res://assets/Background/g3.png" id="22_7k868"]
 [ext_resource type="PackedScene" uid="uid://pi6tnlga1wc3" path="res://Scenes/Enemy/james.tscn" id="23_cbgmd"]
 [ext_resource type="Texture2D" uid="uid://c50km3rupmil6" path="res://assets/Background/g4.png" id="23_hpc6h"]
+[ext_resource type="Texture2D" uid="uid://d1s7vjfasp8hy" path="res://assets/Background/black.png" id="24_3pmx8"]
 [ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="25_ueoa1"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_81s07"]
+distance = -596.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_82ykm"]
+normal = Vector2(1, 0)
+distance = -607.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h6qkg"]
+distance = -602.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ccgfw"]
+distance = -603.0
 
 [sub_resource type="Shader" id="Shader_gt3je"]
 code = "shader_type canvas_item;
@@ -63,22 +77,6 @@ remote_path = NodePath("../../../BackgroundFolder")
 update_rotation = false
 update_scale = false
 
-[node name="BackgroundFolder" type="Node2D" parent="." unique_id=511346629]
-
-[node name="ColorRect" type="ColorRect" parent="BackgroundFolder" unique_id=158250464]
-z_index = -854
-material = SubResource("ShaderMaterial_81s07")
-offset_left = -197.0
-offset_top = -142.0
-offset_right = 196.0
-offset_bottom = 140.0
-
-[node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
-z_index = -1980
-position = Vector2(0.49996948, -1.0000038)
-scale = Vector2(2.933594, 372)
-texture = SubResource("GradientTexture1D_81s07")
-
 [node name="Lue" parent="." unique_id=108679059 instance=ExtResource("9_jkdf5")]
 position = Vector2(-43, -23)
 p1 = ExtResource("15_gt3je")
@@ -114,4 +112,61 @@ water = ExtResource("5_ynf5e")
 collision_mask = 144
 
 [node name="Neil" parent="." unique_id=1441246960 instance=ExtResource("25_ueoa1")]
+position = Vector2(-35, 7)
 collision_mask = 144
+
+[node name="Node2D" type="StaticBody2D" parent="." unique_id=983620064]
+collision_layer = 64
+collision_mask = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=791870499]
+position = Vector2(1258, -335.5)
+scale = Vector2(1, 2.3633406)
+texture = ExtResource("24_3pmx8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=1065857568]
+position = Vector2(-343.0001, -1061)
+scale = Vector2(1.9162225, 1)
+texture = ExtResource("24_3pmx8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=1087304651]
+position = Vector2(225.00002, 1061)
+scale = Vector2(1.9352628, 1)
+texture = ExtResource("24_3pmx8")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D" unique_id=1106560418]
+position = Vector2(-1256, 82.99994)
+scale = Vector2(1, 2.3904552)
+texture = ExtResource("24_3pmx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D" unique_id=251429872]
+position = Vector2(1, 6)
+shape = SubResource("WorldBoundaryShape2D_81s07")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D" unique_id=623189691]
+position = Vector2(6, 0)
+shape = SubResource("WorldBoundaryShape2D_82ykm")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Node2D" unique_id=1200306055]
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_h6qkg")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Node2D" unique_id=388090308]
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_ccgfw")
+
+[node name="BackgroundFolder" type="Node2D" parent="." unique_id=511346629]
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundFolder" unique_id=158250464]
+z_index = -854
+material = SubResource("ShaderMaterial_81s07")
+offset_left = -197.0
+offset_top = -142.0
+offset_right = 196.0
+offset_bottom = 140.0
+
+[node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
+z_index = -1980
+position = Vector2(0.49996948, -1.0000038)
+scale = Vector2(2.933594, 372)
+texture = SubResource("GradientTexture1D_81s07")

@@ -63,6 +63,7 @@ MoveDown={
 2d_physics/layer_2="Bullets"
 2d_physics/layer_4="Dust"
 2d_physics/layer_5="Player"
+2d_physics/layer_7="Boundary"
 2d_physics/layer_8="Avoid"
 
 [physics]
