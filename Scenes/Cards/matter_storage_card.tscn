@@ -4,4 +4,12 @@
 [ext_resource type="Script" uid="uid://cl2eiw7riv8tv" path="res://Scripts/Cards/matter_storage_card.gd" id="2_op7hh"]
 
 [node name="MatterStorageCard" unique_id=937178695 instance=ExtResource("1_m6kj1")]
+offset_left = -154.0
+offset_bottom = 30.0
 script = ExtResource("2_op7hh")
+
+[node name="Upgrade" parent="." index="1" unique_id=1075421596]
+offset_left = 16.0
+offset_top = 242.0
+offset_right = 258.0
+offset_bottom = 365.0

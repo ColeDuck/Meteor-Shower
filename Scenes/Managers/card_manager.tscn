@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://kqmxm2jxk7pc"]
+
+[ext_resource type="Script" uid="uid://dtje1vxmo8re4" path="res://Scripts/Cards/card_manager.gd" id="1_knyty"]
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="2_eu3u4"]
+[ext_resource type="PackedScene" uid="uid://rwwolh217khc" path="res://Scenes/Cards/matter_storage_card.tscn" id="3_j2uvm"]
+[ext_resource type="PackedScene" uid="uid://7dfh64g41urw" path="res://Scenes/Cards/dust.tscn" id="4_2uwj3"]
+[ext_resource type="PackedScene" uid="uid://cdnrgye230y8k" path="res://Scenes/Cards/meteor_card.tscn" id="5_aqhs8"]
+[ext_resource type="PackedScene" uid="uid://io4la1g6n6bm" path="res://Scenes/Cards/fire_card.tscn" id="6_luibc"]
+[ext_resource type="PackedScene" uid="uid://42nv6f8rji08" path="res://Scenes/Cards/water_card.tscn" id="7_c0tlk"]
+[ext_resource type="PackedScene" uid="uid://de3bsekmqkmw5" path="res://Scenes/Cards/ice_card.tscn" id="8_luibc"]
+[ext_resource type="PackedScene" uid="uid://b2csfvlifwag3" path="res://Scenes/Cards/bubble_card.tscn" id="9_43ylt"]
+[ext_resource type="PackedScene" uid="uid://dk6xvuvbyeit5" path="res://Scenes/Cards/burn_card.tscn" id="10_40t51"]
+[ext_resource type="PackedScene" uid="uid://dnifqojgqkwgm" path="res://Scenes/Cards/explode_card.tscn" id="11_llmok"]
+[ext_resource type="PackedScene" uid="uid://d1pmxawra1oiq" path="res://Scenes/Cards/freeze_card.tscn" id="12_g1ugj"]
+[ext_resource type="PackedScene" uid="uid://fdohyhy57xmp" path="res://Scenes/Cards/frostbite_card.tscn" id="13_lw2yu"]
+[ext_resource type="PackedScene" uid="uid://dag0bx0supfmf" path="res://Scenes/Cards/infliction_time_card.tscn" id="14_4yo8k"]
+[ext_resource type="PackedScene" uid="uid://cehmkr7yr1g73" path="res://Scenes/Cards/melt_card.tscn" id="15_tdye8"]
+[ext_resource type="PackedScene" uid="uid://dck1n7iurlg8m" path="res://Scenes/Cards/movement_card.tscn" id="16_jkli7"]
+[ext_resource type="PackedScene" uid="uid://cnu3jt2c1nsru" path="res://Scenes/Cards/rotation_card.tscn" id="17_no6rp"]
+[ext_resource type="PackedScene" uid="uid://6ep8n5k7gesx" path="res://Scenes/Cards/shatter_card.tscn" id="18_8dr07"]
+[ext_resource type="PackedScene" uid="uid://c2hx0doe2xd7t" path="res://Scenes/Cards/xp_card.tscn" id="19_y6quq"]
+
+[node name="CardManager" type="Node2D" unique_id=2043350659]
+script = ExtResource("1_knyty")
+Card = ExtResource("2_eu3u4")
+aMatterStorageCard = ExtResource("3_j2uvm")
+aDustCard = ExtResource("4_2uwj3")
+aMeteorCard = ExtResource("5_aqhs8")
+aFireCard = ExtResource("6_luibc")
+aWaterCard = ExtResource("7_c0tlk")
+aIceCard = ExtResource("8_luibc")
+aBubbleCard = ExtResource("9_43ylt")
+aBurnCard = ExtResource("10_40t51")
+aExplodeCard = ExtResource("11_llmok")
+aFreezeCard = ExtResource("12_g1ugj")
+aFrostbiteCard = ExtResource("13_lw2yu")
+aInflictionTimeCard = ExtResource("14_4yo8k")
+aMeltCard = ExtResource("15_tdye8")
+aMovementCard = ExtResource("16_jkli7")
+aRotationCard = ExtResource("17_no6rp")
+aShatterCard = ExtResource("18_8dr07")
+aXPCard = ExtResource("19_y6quq")

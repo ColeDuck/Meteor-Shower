@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_noq03"]
 [ext_resource type="Script" uid="uid://dsq66l1cjmjcf" path="res://Scripts/Cards/ice_card.gd" id="2_bvp4a"]
+[ext_resource type="PackedScene" uid="uid://kli6bomgjfy0" path="res://Scenes/Dust/ice_dust.tscn" id="3_bvp4a"]
 
 [node name="IceCard" unique_id=937178695 instance=ExtResource("1_noq03")]
 script = ExtResource("2_bvp4a")
+Ice = ExtResource("3_bvp4a")

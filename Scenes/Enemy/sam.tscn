@@ -68,7 +68,7 @@ radius = 8.0
 [node name="Sam" unique_id=334731642 instance=ExtResource("1_s2a3s")]
 base_health = 5.0
 base_damage = 5.0
-base_speed = 33.24
+base_speed = 37.35
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
 material = SubResource("ShaderMaterial_2epeh")

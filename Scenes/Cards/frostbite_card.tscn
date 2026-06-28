@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://fdohyhy57xmp"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_phrxv"]
+[ext_resource type="Script" uid="uid://by4jeskohej5s" path="res://Scripts/Cards/frostbite_card.gd" id="2_tgdxy"]
+
+[node name="FrostbiteCard" unique_id=1425243894 instance=ExtResource("1_phrxv")]
+script = ExtResource("2_tgdxy")

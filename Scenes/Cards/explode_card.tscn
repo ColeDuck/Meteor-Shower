@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dnifqojgqkwgm"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_qxyvn"]
+[ext_resource type="Script" uid="uid://d2oj4aavqlogi" path="res://Scripts/Cards/explode_card.gd" id="2_sy8b0"]
+
+[node name="ExplodeCard" unique_id=1425243894 instance=ExtResource("1_qxyvn")]
+script = ExtResource("2_sy8b0")

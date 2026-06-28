@@ -28,6 +28,7 @@ var storage_size: int = 10000
 
 var Collider: CollisionShape2D
 var copy: CollisionShape2D
+var ended: Sprite2D
 var Camera: Camera2D
 var Arrow: Sprite2D
 
@@ -53,9 +54,12 @@ func _ready():
 	Camera = $MainCam
 	Arrow = $Arrow
 	dust_spawner = %Dust_Spawner
+	ended = %YouDeid
 	add_iron(5)
 
 func calculate_radius_up(matter: Matter) -> void:
+	if matter == null:
+		return
 	var new_radius = matter.position.length()
 	if (new_radius > radius):
 		radius = max(10,new_radius)
@@ -66,6 +70,8 @@ func calculate_radius_up(matter: Matter) -> void:
 	#print(new_hitbox_size)
 	
 func calculate_radius_down(matter: Matter) -> void:
+	if matter == null:
+		return
 	var new_radius = matter.position.length()
 	if (new_radius < radius):
 		radius = max(10,new_radius)
@@ -80,6 +86,8 @@ func get_position_allocated(index: int) -> Vector2:
 	return pos
 
 func collect_dust(dust: Dust) -> void:
+	if CardDisplayer.paused:
+		return
 	# Get type
 	var matter: Matter = dust.collect()
 	
@@ -103,7 +111,6 @@ func collect_dust(dust: Dust) -> void:
 	
 func add_iron(amount: int) -> void:
 	for i in range(amount):
-		print(i)
 		if i < allocated:
 			storage.get(i).queue_free()
 		var new_iron: Matter = iron_scene.instantiate()
@@ -120,7 +127,8 @@ func add_iron(amount: int) -> void:
 		allocated = amount
 
 func damage(amount: int) -> void:
-	print("ow")
+	if CardDisplayer.paused:
+		return
 	for i in range(0,amount):
 		remove_from_storage()
 	
@@ -139,6 +147,10 @@ func flash():
 		material.set("shader_parameter/intensity",0.0);
 
 func _physics_process(delta: float) -> void:
+	
+	if CardDisplayer.paused:
+		return
+		
 	ROTATION_SPEED = StatManager.rotation_acceleration
 	OPPOSITE_ROTATION_SPEED = ROTATION_SPEED * 4
 	ACCELERATION = StatManager.acceleration
@@ -175,13 +187,13 @@ func _physics_process(delta: float) -> void:
 		
 	# Apply movement
 	movement_direction += dir * ACCELERATION * delta
+	movement_direction = movement_direction.limit_length(MAX_SPEED)
 	movement_direction *= DECELERATION
-	movement_direction.limit_length(MAX_SPEED)
 		
 	# Apply rotation
 	rotation += rotational_velocity * delta
-	rotational_velocity *= 0.999
 	rotational_velocity = max(min(StatManager.max_rotation, rotational_velocity), -StatManager.max_rotation)
+	rotational_velocity *= 0.999
 	# Move along rotation
 	
 	velocity = movement_direction
@@ -195,7 +207,7 @@ func _physics_process(delta: float) -> void:
 			movement_direction *= Vector2(-1,1)
 	move_and_collide(velocity * delta, false)
 	# Calculate eject
-	bullet_eject_buildup += 100 * abs(pow(rotational_velocity, 2)) * delta
+	bullet_eject_buildup += 100 * abs(pow(abs(rotational_velocity), 1.5)) * delta
 	#print(bullet_eject_buildup)
 	if (bullet_eject_buildup > MAX_BUILDUP):
 		for i in range(0, StatManager.bullet_streams):
@@ -214,7 +226,8 @@ func _physics_process(delta: float) -> void:
 func shoot(angle_change: float) -> void:
 	bullet_eject_buildup = 0
 	if (allocated == 0):
-		#print("You are dead")
+		ended.visible = true
+		get_tree().quit()
 		return
 	
 	var matter: Matter = storage[allocated - 1]
@@ -234,8 +247,7 @@ func shoot(angle_change: float) -> void:
 	
 	# Speed and direction
 	bullet.velocity = a
-	bullet.velocity *= 30 * abs(rotational_velocity)
-	
+	bullet.velocity *= max(30 * abs(rotational_velocity), 50)
 	# Movement
 	bullet.velocity += movement_direction
 	
@@ -249,30 +261,39 @@ func shoot(angle_change: float) -> void:
 
 func killed_enemy():
 	xp += round(StatManager.xp_mult * 1)
-	if abs(xp - StatManager.xp_required) < 1:
+	if xp - StatManager.xp_required >= -0.2:
 		level_up()
-		xp = 0
-		StatManager.xp_required = pow(1.8, level / 2.0) + 2
-	
 	
 func level_up():
+	xp = StatManager.xp_required + 10
+	CardDisplayer.start()
 	level += 1
-	# Pause Game
-	# Show cards
-	# Upgrade chosen card
-	# Unpause game
-	# idk
 	pass
 
 func remove_from_storage():
 	if (allocated == 0):
-		print("You are dead")
+		ended.visible = true
+		get_tree().quit()
 		return
 	
 	storage[allocated - 1].queue_free()
 	storage.remove_at(allocated - 1)
 	allocated -= 1
+	
+	if (allocated == 0):
+		ended.visible = true
+		get_tree().quit()
+		return
+
+func end_level_up():
+	if level < 65:
+		StatManager.xp_required = (level/1.4) + 3
+	else:
+		StatManager.xp_required = pow(1.1, level) + 2
+	xp = 0
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if CardDisplayer.paused:
+		return
 	if area is Dust:
 		collect_dust(area)

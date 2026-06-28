@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dck1n7iurlg8m"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_t8x5o"]
+[ext_resource type="Script" uid="uid://d82xlhqsuykj" path="res://Scripts/Cards/movement_card.gd" id="2_c6730"]
+
+[node name="MovementCard" unique_id=1425243894 instance=ExtResource("1_t8x5o")]
+script = ExtResource("2_c6730")

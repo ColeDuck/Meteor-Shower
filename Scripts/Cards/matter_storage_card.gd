@@ -22,15 +22,15 @@ func get_amount(amount: int) -> float:
 	if amount == 0:
 		return 20
 	if amount == 1:
-		return 40
-	if amount == 2:
 		return 60
-	if amount == 3:
+	if amount == 2:
 		return 100
-	if amount == 4:
+	if amount == 3:
 		return 150
-	if amount == 5:
+	if amount == 4:
 		return 200
+	if amount == 5:
+		return 300
 	
 	return 0
 	
@@ -39,5 +39,5 @@ func do_upgrade() -> void:
 	times_applied += 1
 	
 	StatManager.max_matter_storage = get_amount(times_applied)
-	if times_applied == 5:
+	if times_applied >= 5:
 		CardManager.remove_card(id)

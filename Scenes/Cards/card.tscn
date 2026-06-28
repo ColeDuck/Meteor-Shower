@@ -1,6 +1,82 @@
 [gd_scene format=3 uid="uid://cgo040gc4qffh"]
 
 [ext_resource type="Script" uid="uid://b2ijcmt484j3r" path="res://Scripts/Cards/card.gd" id="1_bs7d2"]
+[ext_resource type="Texture2D" uid="uid://rqnrrm6ciw0o" path="res://assets/card_sprite.png" id="2_ylnsc"]
+[ext_resource type="FontFile" uid="uid://cv88uxhah70tr" path="res://EdgeOfTheGalaxyRegular-OVEa6.otf" id="3_se2ob"]
 
-[node name="Card" type="Node2D" unique_id=937178695]
+[sub_resource type="LabelSettings" id="LabelSettings_se2ob"]
+line_spacing = 0.0
+font_size = 17
+font_color = Color(0.2492108, 0.94440186, 0.7413311, 1)
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ylnsc"]
+line_spacing = 0.0
+font_size = 22
+font_color = Color(0.9969346, 0.727811, 0.9545781, 1)
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_81s07"]
+line_spacing = 0.0
+font = ExtResource("3_se2ob")
+font_size = 30
+font_color = Color(0.9290831, 0.8113217, 0.94996804, 1)
+outline_size = 27
+outline_color = Color(0.4689678, 0.095749654, 0.427168, 1)
+
+[node name="Card" type="Button" unique_id=1425243894]
+z_index = 2500
+z_as_relative = false
+offset_left = -161.0
+offset_top = -349.0
+offset_right = 111.0
+offset_bottom = 22.0
 script = ExtResource("1_bs7d2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1210047498]
+position = Vector2(138, 189)
+scale = Vector2(4, 4)
+texture = ExtResource("2_ylnsc")
+
+[node name="Upgrade" type="Label" parent="." unique_id=1075421596]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 15.0
+offset_top = 273.0
+offset_right = 251.0
+offset_bottom = 366.0
+text = "Meteor damage multiplier: 5.00 -> 5.70"
+label_settings = SubResource("LabelSettings_se2ob")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Desc" type="Label" parent="." unique_id=637958295]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 17.0
+offset_top = 113.0
+offset_right = 257.0
+offset_bottom = 259.0
+text = "This is a test description for an example upgrade in the game"
+label_settings = SubResource("LabelSettings_ylnsc")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Title" type="Label" parent="." unique_id=1285434784]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 15.0
+offset_right = 259.0
+offset_bottom = 113.0
+text = "This is the title"
+label_settings = SubResource("LabelSettings_81s07")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

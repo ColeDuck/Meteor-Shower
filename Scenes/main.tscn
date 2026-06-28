@@ -29,11 +29,13 @@
 [ext_resource type="Script" uid="uid://dsk444qtggth7" path="res://Scripts/Managers/enemy_spawner.gd" id="25_u50mg"]
 [ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="25_ueoa1"]
 [ext_resource type="PackedScene" uid="uid://dun0ijl0jtw0c" path="res://Scenes/Enemy/sam.tscn" id="26_6vcvc"]
-[ext_resource type="PackedScene" uid="uid://kqmxm2jxk7pc" path="res://Scenes/Cards/card_manager.tscn" id="29_7k868"]
-[ext_resource type="Script" uid="uid://dtje1vxmo8re4" path="res://Scripts/Cards/card_manager.gd" id="30_hpc6h"]
+[ext_resource type="PackedScene" uid="uid://kqmxm2jxk7pc" path="res://Scenes/Managers/card_manager.tscn" id="29_7k868"]
 [ext_resource type="Script" uid="uid://cuk1ql8h45g8l" path="res://Scenes/xp_bar.gd" id="31_e08e2"]
+[ext_resource type="PackedScene" uid="uid://ld3bcpr7q6i6" path="res://Scenes/Managers/card_displayer.tscn" id="31_r33sp"]
 [ext_resource type="Texture2D" uid="uid://cpq7bpfj3ksfr" path="res://assets/bright.png" id="33_neg2b"]
 [ext_resource type="FontFile" uid="uid://cv88uxhah70tr" path="res://EdgeOfTheGalaxyRegular-OVEa6.otf" id="34_neg2b"]
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="35_r33sp"]
+[ext_resource type="Texture2D" uid="uid://dh2seil1ubrmg" path="res://you_died.png" id="36_hdf80"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_81s07"]
 distance = -596.0
@@ -119,14 +121,6 @@ p3 = ExtResource("12_h1bgf")
 p4 = ExtResource("13_b3802")
 p5 = ExtResource("14_fevyy")
 
-[node name="Dust_Spawner" type="Node" parent="." unique_id=1317305004]
-unique_name_in_owner = true
-script = ExtResource("7_6bp64")
-meteor = ExtResource("4_344ge")
-ice = ExtResource("7_d1ilt")
-fire = ExtResource("6_hptm8")
-water = ExtResource("5_ynf5e")
-
 [node name="Node2D" type="StaticBody2D" parent="." unique_id=983620064]
 collision_layer = 64
 collision_mask = 16
@@ -176,15 +170,15 @@ shape = SubResource("WorldBoundaryShape2D_ccgfw")
 [node name="ColorRect" type="ColorRect" parent="BackgroundFolder" unique_id=158250464]
 z_index = -854
 material = SubResource("ShaderMaterial_81s07")
-offset_left = -197.0
-offset_top = -142.0
-offset_right = 196.0
-offset_bottom = 140.0
+offset_left = -277.0
+offset_top = -209.0
+offset_right = 272.0
+offset_bottom = 192.0
 
 [node name="Gradeint" type="Sprite2D" parent="BackgroundFolder" unique_id=1604671409]
 z_index = -1980
-position = Vector2(3.8146973e-06, -49)
-scale = Vector2(2.933594, 372)
+position = Vector2(5.9604645e-08, 0)
+scale = Vector2(3.7304685, 531)
 texture = SubResource("GradientTexture1D_81s07")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1482946410]
@@ -197,35 +191,45 @@ four = ExtResource("25_ueoa1")
 five = ExtResource("22_ee4r6")
 
 [node name="CardManager" parent="." unique_id=2043350659 instance=ExtResource("29_7k868")]
-script = ExtResource("30_hpc6h")
+script = null
 
-[node name="XP_BAR" type="Area2D" parent="." unique_id=1681822591]
+[node name="CardDisplayer" parent="." unique_id=1533528693 instance=ExtResource("31_r33sp")]
+Card = ExtResource("35_r33sp")
+
+[node name="Dust_Spawner" type="Node" parent="." unique_id=1317305004]
+unique_name_in_owner = true
+script = ExtResource("7_6bp64")
+meteor = ExtResource("4_344ge")
+ice = ExtResource("7_d1ilt")
+fire = ExtResource("6_hptm8")
+water = ExtResource("5_ynf5e")
+
+[node name="UI THINGS" type="Area2D" parent="." unique_id=1681822591]
 z_index = 2400
 z_as_relative = false
 script = ExtResource("31_e08e2")
 
-[node name="BackgroundBar" type="Sprite2D" parent="XP_BAR" unique_id=28472275]
+[node name="BackgroundBar" type="Sprite2D" parent="UI THINGS" unique_id=28472275]
 position = Vector2(1, -137)
 scale = Vector2(8.82, 1.44)
 texture = ExtResource("2_hpc6h")
 
-[node name="Move" type="Sprite2D" parent="XP_BAR" unique_id=1879342832]
+[node name="Move" type="Sprite2D" parent="UI THINGS" unique_id=1879342832]
 unique_name_in_owner = true
-position = Vector2(-468.62503, -168.75)
-scale = Vector2(11.065001, 2.71)
+position = Vector2(-1080.5, -168.75)
+scale = Vector2(35.54, 2.71)
 texture = ExtResource("33_neg2b")
 
-[node name="Level" type="Label" parent="XP_BAR" unique_id=896738949]
+[node name="Level" type="Label" parent="UI THINGS" unique_id=896738949]
 unique_name_in_owner = true
-offset_left = -241.0
-offset_top = -99.0
-offset_right = -148.0
-offset_bottom = -76.0
+offset_left = -189.0
+offset_top = -97.0
+offset_right = -96.0
+offset_bottom = -74.0
 text = "Level 5"
 label_settings = SubResource("LabelSettings_d2k27")
-horizontal_alignment = 2
 
-[node name="OutOf" type="Label" parent="XP_BAR" unique_id=1494345218]
+[node name="OutOf" type="Label" parent="UI THINGS" unique_id=1494345218]
 unique_name_in_owner = true
 visible = false
 offset_left = -188.0
@@ -234,3 +238,8 @@ offset_right = -92.0
 offset_bottom = -75.0
 text = "20/60"
 label_settings = SubResource("LabelSettings_e08e2")
+
+[node name="YouDeid" type="Sprite2D" parent="UI THINGS" unique_id=1032303222]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("36_hdf80")

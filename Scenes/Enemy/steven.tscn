@@ -66,9 +66,9 @@ size = Vector2(22, 30)
 size = Vector2(20, 11)
 
 [node name="Steven" unique_id=334731642 instance=ExtResource("1_ei5v6")]
-base_health = 200.0
+base_health = 32.965
 base_damage = 30.0
-base_speed = 60.22
+base_speed = 61.88
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
 material = SubResource("ShaderMaterial_5xc2b")

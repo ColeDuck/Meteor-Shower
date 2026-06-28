@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c2hx0doe2xd7t"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_wmrlb"]
+[ext_resource type="Script" uid="uid://b3t3gcvjknb7x" path="res://Scripts/Cards/xp_card.gd" id="2_5ndkl"]
+
+[node name="XPCard" unique_id=1425243894 instance=ExtResource("1_wmrlb")]
+script = ExtResource("2_5ndkl")

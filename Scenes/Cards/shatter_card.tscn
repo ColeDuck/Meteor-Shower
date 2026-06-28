@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://6ep8n5k7gesx"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_mo8vr"]
+[ext_resource type="Script" uid="uid://bimqldtbw73n4" path="res://Scripts/Cards/shatter_card.gd" id="2_rcc5g"]
+
+[node name="ShatterCard" unique_id=1425243894 instance=ExtResource("1_mo8vr")]
+script = ExtResource("2_rcc5g")

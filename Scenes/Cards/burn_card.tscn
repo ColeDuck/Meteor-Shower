@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dk6xvuvbyeit5"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_pnd88"]
+[ext_resource type="Script" uid="uid://0e3qebsdqsyq" path="res://Scripts/Cards/burn_card.gd" id="2_ll1yl"]
+
+[node name="BurnCard" unique_id=1425243894 instance=ExtResource("1_pnd88")]
+script = ExtResource("2_ll1yl")

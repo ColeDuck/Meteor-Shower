@@ -70,8 +70,8 @@ height = 22.0
 rotation = 1.5707964
 motion_mode = 1
 base_health = 1.0
-base_damage = 50.0
-base_speed = 79.03
+base_damage = 10.68
+base_speed = 81.195
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
 material = SubResource("ShaderMaterial_waxn7")

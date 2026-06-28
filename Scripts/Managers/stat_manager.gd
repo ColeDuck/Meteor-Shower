@@ -21,7 +21,7 @@ var water_bullet_per: int = 1
 var water_base_damage: float = 3
 var water_damage_mult: float = 1.0
 
-var spawn_fire: bool = true
+var spawn_fire: bool = false
 var fire_bullet_per: int = 1
 var fire_damage_mult: float = 1.0
 var fire_base_damage: float = 3
@@ -46,10 +46,10 @@ var burn_damage_mult: float = 1.0
 var frostbite_tick_rate: float = 1.0
 var frostbite_base_damage: float = 4.0
 var frostbite_damage_mult: float = 1.0
-var frostbite_slow_mult: float = 0.4
+var frostbite_slow_mult: float = 0.6
 
 # Frostbite + bubble (any order)
-var frozen_infliction_time: float = 1.0
+var frozen_infliction_time: float = 2.0
 # Bubble + burning (in any order)
 # Burning + frostbite (any order)
 var vapemelt_damage_mult: float = 1.0
@@ -66,10 +66,10 @@ var min_infliction_time: float = 2.0
 var max_infliction_time: float = 5.0
 
 # Movement
-var rotation_acceleration: float = 5
-var max_rotation: float = 2
-var acceleration: float = 40
-var max_velocity: float = 40
+var rotation_acceleration: float = 5.0 # Start at 5
+var max_rotation: float = 2.0 # Start at 2
+var acceleration: float = 40.0 # 40 -> 100
+var max_velocity: float = 80.0 # 80 -> 150
 
 # Level up
 var xp_mult: float = 1.0

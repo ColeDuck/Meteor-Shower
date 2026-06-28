@@ -52,9 +52,35 @@ func spawn_one_dust() -> void:
 	add_child(dust, false)
 	
 
+func replace_dust(dust: PackedScene):
+	var all_dust = get_children()
+	
+	var total_dust_types = 1
+	if StatManager.spawn_fire:
+		total_dust_types += 1
+	if StatManager.spawn_water:
+		total_dust_types += 1
+	if StatManager.spawn_ice:
+		total_dust_types += 1
+	
+	for i in range(all_dust.size()):
+		
+		var d = all_dust.get(i)
+		if d is not Dust:
+			continue
+		
+		var random = randi_range(1, total_dust_types)
+		if random == 1:
+			var new_dust
+			new_dust = dust.instantiate()
+			new_dust.global_position = d.global_position
+			add_child(new_dust, false)
+			d.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if CardDisplayer.paused:
+		return
 	max_dust = StatManager.dust_spawn_mult * 500
 	
 	if total_dust + 1 > max_dust:

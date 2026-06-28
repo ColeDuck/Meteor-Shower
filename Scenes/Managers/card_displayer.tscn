@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ld3bcpr7q6i6"]
+
+[ext_resource type="Script" uid="uid://b427ojrkfcwb0" path="res://Scripts/Managers/card_displayer.gd" id="1_vaqkd"]
+
+[node name="CARD_DISPLAYER" type="CanvasLayer" unique_id=1533528693]
+offset = Vector2(26.65, 0)
+transform = Transform2D(1, 0, 0, 1, 26.65, 0)
+script = ExtResource("1_vaqkd")

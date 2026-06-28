@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dqqgnwpfh8pac"]
+
+[ext_resource type="Script" uid="uid://daus05o80vtdl" path="res://Scripts/Managers/dust_spawner.gd" id="1_io24l"]
+[ext_resource type="PackedScene" uid="uid://c1enkd4f1l3ml" path="res://Scenes/Dust/meteor_dust.tscn" id="2_304x0"]
+[ext_resource type="PackedScene" uid="uid://kli6bomgjfy0" path="res://Scenes/Dust/ice_dust.tscn" id="3_5m6tq"]
+[ext_resource type="PackedScene" uid="uid://d0mjwd5edg0fp" path="res://Scenes/Dust/fire_dust.tscn" id="4_f6vtc"]
+[ext_resource type="PackedScene" uid="uid://cjb0gjcwt5s86" path="res://Scenes/Dust/water_dust.tscn" id="5_jhlws"]
+
+[node name="Dust_Spawner" type="Node" unique_id=107587434]
+script = ExtResource("1_io24l")
+meteor = ExtResource("2_304x0")
+ice = ExtResource("3_5m6tq")
+fire = ExtResource("4_f6vtc")
+water = ExtResource("5_jhlws")

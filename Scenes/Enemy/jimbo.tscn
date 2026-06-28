@@ -67,9 +67,9 @@ radius = 9.0
 height = 20.0
 
 [node name="Jimbo" unique_id=334731642 instance=ExtResource("1_jnppt")]
-base_health = 40.0
+base_health = 15.21
 base_damage = 20.0
-base_speed = 19.55
+base_speed = 36.26
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1536105433]
 material = SubResource("ShaderMaterial_mq00c")

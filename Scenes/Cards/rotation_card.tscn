@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cnu3jt2c1nsru"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_tw51u"]
+[ext_resource type="Script" uid="uid://b6jdsgypdxl7i" path="res://Scripts/Cards/rotation_card.gd" id="2_mfn6v"]
+
+[node name="RotationCard" unique_id=1425243894 instance=ExtResource("1_tw51u")]
+script = ExtResource("2_mfn6v")

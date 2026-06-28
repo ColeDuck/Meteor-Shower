@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d1pmxawra1oiq"]
+
+[ext_resource type="PackedScene" uid="uid://cgo040gc4qffh" path="res://Scenes/Cards/card.tscn" id="1_ln1ne"]
+[ext_resource type="Script" uid="uid://cjganj66quf8m" path="res://Scripts/Cards/freeze_card.gd" id="2_mgwlo"]
+
+[node name="FreezeCard" unique_id=1425243894 instance=ExtResource("1_ln1ne")]
+script = ExtResource("2_mgwlo")

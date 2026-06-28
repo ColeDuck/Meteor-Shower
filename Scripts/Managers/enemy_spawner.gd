@@ -19,13 +19,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if CardDisplayer.paused:
+		return
 	time_since_start += delta
 	harder(time_since_start)
-	
 	if total_enemies + 1 > max_enemies:
 		return
+	
+	var time_needed_till_next_spawn = 0.50 / StatManager.enemy_spawn_mult
 	time += delta
-	if time < 5 / StatManager.enemy_spawn_mult:
+	if time < time_needed_till_next_spawn:
 		return
 	time = 0
 	
@@ -51,6 +54,10 @@ func _process(delta: float) -> void:
 		randY = randi_range(-ys, ys)
 		
 	var max_type = min(time_since_start / 60, 4)
+	if time_since_start > 500:
+		max_type = 4
+	else:
+		max_type = min(3, max_type)
 		
 	var type = randi_range(0,max_type)
 	var dust: Enemy
@@ -71,8 +78,9 @@ func _process(delta: float) -> void:
 	add_child(dust, false)
 	
 func harder(time: float):
-	var new_value: float = pow(2, time_since_start / 60.0)
-	StatManager.enemy_damage_mult = new_value / 2.0
-	StatManager.enemy_spawn_mult = new_value
-	StatManager.enemy_speed_mult = new_value / 2.0
+	var new_value: float = pow(2, time_since_start / 90.0) + 1
+	StatManager.enemy_damage_mult = max(new_value / 16.0, 1.0)
+	StatManager.enemy_spawn_mult = new_value / 20.0
+	StatManager.enemy_speed_mult = max(new_value / 17.0, 1.0)
+	StatManager.enemy_health_mult = max(1.0, new_value / 17.0)
 	

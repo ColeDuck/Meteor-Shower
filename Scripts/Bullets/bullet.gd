@@ -10,6 +10,8 @@ var time_alive: float = 0
 
 var time_to_live: float = 7
 
+var camera
+
 #var smash_particle: GPUParticles2D
 #var trail_particle: GPUParticles2D
 
@@ -56,9 +58,13 @@ func _ready():
 	#smash_particle = $Smash
 	pass
 	
+	
 func _physics_process(delta: float) -> void:
+	if CardDisplayer.paused:
+		return
 	if global_position.x < -600 or global_position.x > 600 or global_position.y > 600 or global_position.x < -600:
 		destroy()
+	
 	
 	
 	position += velocity * delta
