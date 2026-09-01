@@ -23,7 +23,7 @@ func get_amount(amount: int) -> float:
 	if amount == 0:
 		return 1.0
 	
-	return pow(2, amount / 1.5)
+	return pow(2, amount / 3.0)
 	
 # Changes stats in StatManager (implicitly increases stats)
 func do_upgrade() -> void:

@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var enemy_spawn_mult: float = 1.0
 var enemy_health_mult: float = 1.0
 var enemy_damage_mult: float = 1.0
