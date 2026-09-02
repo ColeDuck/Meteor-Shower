@@ -5,17 +5,19 @@ extends Node
 @export var fire: PackedScene
 @export var water: PackedScene
 
+var location: Node2D
+
 var total_dust: int = 0
 var max_dust
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-
 	total_dust += 300
+	
+func opening_dust() -> void:
 	for i in range(1, 300):
 		spawn_one_dust()
-			
 		
 func spawn_one_dust() -> void:
 	var randX = randi_range(-600, 600)
@@ -49,7 +51,7 @@ func spawn_one_dust() -> void:
 			
 	dust.position.x = randX
 	dust.position.y = randY
-	add_child(dust, false)
+	location.add_child(dust, false)
 	
 
 func replace_dust(dust: PackedScene):
@@ -74,12 +76,12 @@ func replace_dust(dust: PackedScene):
 			var new_dust
 			new_dust = dust.instantiate()
 			new_dust.global_position = d.global_position
-			add_child(new_dust, false)
+			location.add_child(new_dust, false)
 			d.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	max_dust = StatManager.dust_spawn_mult * 500
 	
@@ -88,5 +90,3 @@ func _process(delta: float) -> void:
 	total_dust += 1
 	
 	spawn_one_dust()
-	
-	

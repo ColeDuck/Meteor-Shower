@@ -23,7 +23,6 @@ script = ExtResource("1_a2bka")
 iron_scene = ExtResource("2_m5q5l")
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=1179922900]
-z_index = 501
 position = Vector2(0, -13)
 texture = ExtResource("2_a2bka")
 

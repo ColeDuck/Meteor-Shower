@@ -19,7 +19,7 @@ var bubble_vector: Vector2 # Stores angle that we were hit at
 @export var shatter: PackedScene
 @export var vaporize: PackedScene
 
-@export var death: PackedScene
+@export var death: PackedScene = preload("res://Scenes/Particles/death.tscn")
 
 var health: float
 var damage: float
@@ -51,7 +51,7 @@ func _ready() -> void:
 
 # Does movement and processes the infliction
 func _process(delta: float) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	infliction_so_far += delta
 	infliction_tick += delta
@@ -213,7 +213,7 @@ func end_infliction():
 	infliction_length = 1
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	if area is not Bullet:
 		return

@@ -1,6 +1,8 @@
 class_name Asteroid
 extends CharacterBody2D
 
+signal start_card
+
 # Movement
 var ROTATION_SPEED: float = 3
 var OPPOSITE_ROTATION_SPEED: float = 20
@@ -34,7 +36,6 @@ var Arrow: Sprite2D
 
 var radius: float = 10
 
-var dust_spawner
 var last_change: int
 
 var xp: float = 0
@@ -53,7 +54,6 @@ func _ready():
 	copy = %CopyForBoundary
 	Camera = $MainCam
 	Arrow = $Arrow
-	dust_spawner = %Dust_Spawner
 	ended = %YouDeid
 	add_iron(5)
 
@@ -86,7 +86,7 @@ func get_position_allocated(index: int) -> Vector2:
 	return pos
 
 func collect_dust(dust: Dust) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	# Get type
 	var matter: Matter = dust.collect()
@@ -96,7 +96,6 @@ func collect_dust(dust: Dust) -> void:
 		return
 	
 	matter.position = get_position_allocated(allocated)
-	matter.Outline.z_index = -1
 	
 	var rot = randi_range(0, 3)
 	matter.rotation_degrees = 90 * rot
@@ -107,7 +106,7 @@ func collect_dust(dust: Dust) -> void:
 	calculate_radius_up(matter)
 	add_child(matter, false)
 	dust.remove()
-	dust_spawner.total_dust -= 1
+	DustSpawner.total_dust -= 1
 	
 func add_iron(amount: int) -> void:
 	for i in range(amount):
@@ -116,7 +115,6 @@ func add_iron(amount: int) -> void:
 		var new_iron: Matter = iron_scene.instantiate()
 		var pos = get_position_allocated(i)
 		new_iron.position = pos
-		new_iron.Outline.z_index = -1
 		var rot = randi_range(0, 3)
 		new_iron.rotation_degrees = 90 * rot
 		storage.insert(i, new_iron)
@@ -127,7 +125,7 @@ func add_iron(amount: int) -> void:
 		allocated = amount
 
 func damage(amount: int) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	for i in range(0,amount):
 		remove_from_storage()
@@ -148,7 +146,7 @@ func flash():
 
 func _physics_process(delta: float) -> void:
 	
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 		
 	ROTATION_SPEED = StatManager.rotation_acceleration
@@ -266,7 +264,7 @@ func killed_enemy():
 	
 func level_up():
 	xp = StatManager.xp_required + 10
-	CardDisplayer.start()
+	start_card.emit()
 	level += 1
 	pass
 
@@ -293,7 +291,7 @@ func end_level_up():
 	xp = 0
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	if area is Dust:
 		collect_dust(area)

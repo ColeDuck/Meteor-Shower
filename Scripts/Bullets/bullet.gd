@@ -60,7 +60,7 @@ func _ready():
 	
 	
 func _physics_process(delta: float) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	if global_position.x < -600 or global_position.x > 600 or global_position.y > 600 or global_position.x < -600:
 		destroy()

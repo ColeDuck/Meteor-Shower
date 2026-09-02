@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cydq6jhjwn52p" path="res://Scripts/Enemy/animated_sprite_2d.gd" id="3_dmwl5"]
 [ext_resource type="PackedScene" uid="uid://bfoc3knkejkb2" path="res://Scenes/Bullets/shatter.tscn" id="3_pqgp3"]
 [ext_resource type="PackedScene" uid="uid://g8odjw3bygyl" path="res://Scenes/Bullets/vape_melt.tscn" id="4_4ad2a"]
-[ext_resource type="PackedScene" uid="uid://rs21himvbn07" path="res://Scenes/Particles/death.tscn" id="5_pqgp3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nvvbs"]
 resource_local_to_scene = true
@@ -24,7 +23,6 @@ ice = NodePath("ice")
 explode = ExtResource("2_gx76c")
 shatter = ExtResource("3_pqgp3")
 vaporize = ExtResource("4_4ad2a")
-death = ExtResource("5_pqgp3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1536105433]
 unique_name_in_owner = true

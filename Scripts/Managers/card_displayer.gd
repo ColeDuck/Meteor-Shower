@@ -1,3 +1,4 @@
+class_name CardDisplay
 extends CanvasLayer
 
 @export var Card: PackedScene
@@ -7,9 +8,12 @@ var total_cards
 
 var player: Asteroid
 
-func start() -> void:
-	paused = true
+func _ready() -> void:
 	player = Asteroid.instance
+	player.start_card.connect(start)
+
+func start() -> void:
+	GlobalVariables.game_paused = true
 	
 	# Get the three cards
 	cards = CardManager.get_three_cards()
@@ -22,7 +26,8 @@ func start() -> void:
 		var card: Card = cards.get(i)
 		add_child(card)
 		card.visible = true
-		card.position = Vector2((300 * i) + 120, 150)
+		card.callback = me_clicked
+		card.position = Vector2((350 * i) + 435, 365)
 		card.display()
 	
 func end() -> void:
@@ -34,7 +39,7 @@ func end() -> void:
 	player.end_level_up()
 	
 	cards.clear()
-	paused = false
+	GlobalVariables.game_paused = false
 	
 func me_clicked(id: int):
 	for i in range(cards.size()):

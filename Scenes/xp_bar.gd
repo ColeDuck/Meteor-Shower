@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 var player: Asteroid
 var camera: Camera2D
@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 	move.position.x = start.x + percentage * 384
 	
 	# Move with camera
-	global_position = camera.get_screen_center_position()
 	
 	level_display.text = "Level: " + str(player.level)
 	OutOfDisplay.text = str(player.xp) + " / " + str(StatManager.xp_required)

@@ -7,6 +7,7 @@ extends Node
 @export var five: PackedScene
 
 var player: Asteroid
+var location: Node2D
 
 var total_enemies: int = 0
 var max_enemies: int = 50
@@ -14,12 +15,14 @@ var max_enemies: int = 50
 var time: float = 0
 var time_since_start: float = 0
 
+var camera
+
 func _ready() -> void:
 	player = Asteroid.instance
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if CardDisplayer.paused:
+	if GlobalVariables.game_paused:
 		return
 	time_since_start += delta
 	harder(time_since_start)
@@ -32,7 +35,6 @@ func _process(delta: float) -> void:
 		return
 	time = 0
 	
-	var camera = %MainCam
 	var center = camera.get_screen_center_position()
 	var xs = 384 / 2
 	var ys = 216 / 2
@@ -75,7 +77,7 @@ func _process(delta: float) -> void:
 			
 	dust.global_position.x = randX + center.x
 	dust.global_position.y = randY + center.y
-	add_child(dust, false)
+	location.add_child(dust, false)
 	
 func harder(time: float):
 	var new_value: float = pow(2, time_since_start / 90.0) + 1

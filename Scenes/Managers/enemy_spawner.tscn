@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://boujsvx3mfbew"]
+
+[ext_resource type="Script" uid="uid://dsk444qtggth7" path="res://Scripts/Managers/enemy_spawner.gd" id="1_rg1lx"]
+[ext_resource type="PackedScene" uid="uid://dun0ijl0jtw0c" path="res://Scenes/Enemy/sam.tscn" id="2_albwn"]
+[ext_resource type="PackedScene" uid="uid://pi6tnlga1wc3" path="res://Scenes/Enemy/james.tscn" id="3_imwte"]
+[ext_resource type="PackedScene" uid="uid://ctts3n0wkc2qi" path="res://Scenes/Enemy/jimbo.tscn" id="4_h8c5u"]
+[ext_resource type="PackedScene" uid="uid://dq320n088wynt" path="res://Scenes/Enemy/neil.tscn" id="5_be756"]
+[ext_resource type="PackedScene" uid="uid://daqeycmvn2fl8" path="res://Scenes/Enemy/steven.tscn" id="6_6hefs"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=1706681929]
+script = ExtResource("1_rg1lx")
+one = ExtResource("2_albwn")
+two = ExtResource("3_imwte")
+three = ExtResource("4_h8c5u")
+four = ExtResource("5_be756")
+five = ExtResource("6_6hefs")

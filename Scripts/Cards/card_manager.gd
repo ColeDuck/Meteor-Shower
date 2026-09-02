@@ -3,6 +3,8 @@ extends Node2D
 @export var Card: PackedScene
 var cards: Array[Card]
 
+@export var card_displayer: CardDisplay
+
 @export var aMatterStorageCard: PackedScene
 @export var aDustCard: PackedScene
 @export var aMeteorCard: PackedScene
@@ -73,7 +75,6 @@ func contains_card(id: int):
 		if card.id == id:
 			return true
 	return false
-	
 	
 func remove_card(id: int):
 	for i in range(cards.size()):

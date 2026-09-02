@@ -5,6 +5,8 @@ var Title: Label
 var Desc: Label
 var Upgrade: Label
 
+var callback: Callable
+
 var times_applied: int = 0
 @export var id: int
 	
@@ -38,4 +40,4 @@ func _input(event):
 		print("global click at ", event.position)
 
 func _on_button_up() -> void:
-	CardDisplayer.me_clicked(id)
+	callback.call(id)

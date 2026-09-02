@@ -7,6 +7,6 @@ script = ExtResource("1_f7qkt")
 Nugget = NodePath("Nugget")
 Outline = NodePath("Outline")
 
-[node name="Nugget" type="Sprite2D" parent="." unique_id=573175117]
-
 [node name="Outline" type="Sprite2D" parent="." unique_id=1458586969]
+
+[node name="Nugget" type="Sprite2D" parent="." unique_id=573175117]
