@@ -55,7 +55,7 @@ func spawn_one_dust() -> void:
 	
 
 func replace_dust(dust: PackedScene):
-	var all_dust = get_children()
+	var all_dust = location.get_children()
 	
 	var total_dust_types = 1
 	if StatManager.spawn_fire:
@@ -83,7 +83,7 @@ func replace_dust(dust: PackedScene):
 func _process(delta: float) -> void:
 	if GlobalVariables.game_paused:
 		return
-	max_dust = StatManager.dust_spawn_mult * 500
+	max_dust = StatManager.dust_spawn_mult * 1000
 	
 	if total_dust + 1 > max_dust:
 		return

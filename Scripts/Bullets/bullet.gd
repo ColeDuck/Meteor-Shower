@@ -10,7 +10,7 @@ var time_alive: float = 0
 
 var time_to_live: float = 7
 
-var camera
+var camera: Camera2D
 
 #var smash_particle: GPUParticles2D
 #var trail_particle: GPUParticles2D
@@ -62,10 +62,17 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if GlobalVariables.game_paused:
 		return
+	# If out of bounds of the map
 	if global_position.x < -600 or global_position.x > 600 or global_position.y > 600 or global_position.x < -600:
 		destroy()
 	
+	# If out of bounds of the camera
+	var point = camera.get_screen_center_position() - (camera.get_viewport_rect().size / 10) - Vector2(4,4)
+	if global_position.x <= point.x and global_position.x <= point.x + 392:
+		destroy()
 	
+	if global_position.y <= point.y and global_position.y <= point.y + 224:
+		destroy()
 	
 	position += velocity * delta
 	#trail_particle.rotation = velocity.angle() + PI # Set dir of particles to opposite of movement direction

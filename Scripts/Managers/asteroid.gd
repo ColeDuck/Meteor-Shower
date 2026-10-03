@@ -206,7 +206,7 @@ func _physics_process(delta: float) -> void:
 	move_and_collide(velocity * delta, false)
 	# Calculate eject
 	bullet_eject_buildup += 100 * abs(pow(abs(rotational_velocity), 1.5)) * delta
-	#print(bullet_eject_buildup)
+
 	if (bullet_eject_buildup > MAX_BUILDUP):
 		for i in range(0, StatManager.bullet_streams):
 			if (Input.is_action_pressed("Shoot")):
@@ -249,8 +249,8 @@ func shoot(angle_change: float) -> void:
 	# Movement
 	bullet.velocity += movement_direction
 	
-	bullet.top_level = true
-	add_child(bullet, false)
+	bullet.camera = %MainCam
+	add_sibling(bullet, false)
 	
 	if matter.destroy():
 		remove_from_storage()
@@ -263,7 +263,7 @@ func killed_enemy():
 		level_up()
 	
 func level_up():
-	xp = StatManager.xp_required + 10
+	xp = StatManager.xp_required
 	start_card.emit()
 	level += 1
 	pass

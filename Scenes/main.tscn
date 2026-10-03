@@ -121,12 +121,12 @@ p4 = ExtResource("23_hpc6h")
 p5 = ExtResource("23_hpc6h")
 
 [node name="Darken" type="ColorRect" parent="Background" unique_id=1880010832]
-offset_right = 479.0
+offset_left = 0.2
+offset_right = 479.2
 offset_bottom = 272.0
 color = Color(0.15294118, 0.023529412, 0.14901961, 0.46666667)
 
 [node name="DustLayer" type="Node2D" parent="." unique_id=113370408]
-position = Vector2(128, 72)
 script = ExtResource("17_cbgmd")
 
 [node name="EnemyLayer" type="Node2D" parent="." unique_id=314078330]
@@ -142,7 +142,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 12.705
 
 [node name="Bounds" type="StaticBody2D" parent="." unique_id=983620064]
-visible = false
 collision_layer = 64
 collision_mask = 16
 
@@ -211,12 +210,13 @@ label_settings = SubResource("LabelSettings_d2k27")
 
 [node name="Kills" type="Label" parent="UI" unique_id=1494345218]
 unique_name_in_owner = true
-offset_left = 1705.0
+offset_left = 1448.0
 offset_top = 65.0
 offset_right = 1891.0
 offset_bottom = 152.0
-text = "20/60"
+text = "Kills: 0"
 label_settings = SubResource("LabelSettings_e08e2")
+horizontal_alignment = 2
 
 [node name="YouDeid" type="Sprite2D" parent="UI" unique_id=1032303222]
 unique_name_in_owner = true

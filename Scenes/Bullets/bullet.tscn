@@ -4,6 +4,7 @@
 
 [node name="Bullet" type="Area2D" unique_id=2113119815]
 script = ExtResource("1_tcy0y")
+health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1349771428]
 

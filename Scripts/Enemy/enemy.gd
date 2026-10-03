@@ -131,6 +131,7 @@ func damage_me(damage: float) -> void:
 		explosion_particle.emitting = true
 		explosion_particle.global_position = global_position
 		add_sibling(explosion_particle)
+		StatManager.kills += 1
 		queue_free() # Die
 	
 	# Play damage amimation here
@@ -152,6 +153,7 @@ func start_reaction(new_infliction: String):
 	elif i == "burn" and ii == "bubble" or i == "bubble" and ii == "burn":
 		var b: Bullet = vaporize.instantiate()
 		b.global_position = global_position
+		b.camera = $MainCam
 		add_sibling(b)
 		end_infliction()
 		return
@@ -159,6 +161,7 @@ func start_reaction(new_infliction: String):
 	elif i == "burn" and ii == "frostbite" or i == "frostbite" and ii == "burn":
 		var b: Bullet = vaporize.instantiate()
 		b.global_position = global_position
+		b.camera = $MainCam
 		add_sibling(b)
 		end_infliction()
 		return
@@ -166,6 +169,7 @@ func start_reaction(new_infliction: String):
 	elif i == "freeze" and ii == "meteor":
 		var b: Bullet = shatter.instantiate()
 		b.global_position = global_position
+		b.camera = $MainCam
 		add_sibling(b)
 		end_infliction()
 		return
@@ -173,6 +177,7 @@ func start_reaction(new_infliction: String):
 	elif ii == "meteor" and i == "burn":
 		var b: Bullet = explode.instantiate()
 		b.global_position = global_position
+		b.camera = $MainCam
 		add_sibling(b)
 		end_infliction()
 		return
